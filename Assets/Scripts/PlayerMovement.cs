@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] float jumpForce = 100f;
+    [SerializeField] float gravityMultiplier = 40f;
     bool grounded;
     bool jumpCancelled;
 
@@ -19,20 +20,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashingPower = 300f;
     bool isDashing = false;
     bool canDash = true;
+
+    [Header("CheckGround")]
+    [SerializeField] float playerHeight;
+    [SerializeField] float checkOffset = 0.2f;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform feet;
+
     PlayerInput playerInput;
     Rigidbody2D rb;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        if(playerInput == null)
-        {
-            Debug.LogError("PlayerInput component is missing");
-        }
+  
     }
     void Start()
-    {
-        
+    {    
         rb = GetComponent<Rigidbody2D>();
+        playerInput.onJump += Jump;
+        playerInput.onJumpRelease += CutJump;
     }
 
     // Update is called once per frame
@@ -43,6 +49,15 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        CheckGrounded();
+        IncreaseGravity();
+    }
+    void IncreaseGravity()
+    {
+        if (rb.velocity.y < 1)
+        {
+            rb.AddForce(Vector2.down * gravityMultiplier * Time.deltaTime, ForceMode2D.Force);
+        }
     }
     void Jump()
     {
@@ -51,6 +66,18 @@ public class PlayerMovement : MonoBehaviour
             jumpCancelled = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
+    void CutJump()
+    {
+        if(!grounded && !jumpCancelled)
+        {
+            jumpCancelled = true;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.3f);
+        }
+    }
+    void CheckGrounded()
+    {
+        grounded = Physics2D.Raycast(transform.position, Vector2.down, playerHeight * 0.5f + checkOffset, groundLayer);
     }
     void Move()
     {
