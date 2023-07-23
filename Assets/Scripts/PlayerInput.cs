@@ -44,7 +44,7 @@ public class PlayerInput : MonoBehaviour
     }
     void GetJumpInput()
     {
-        if (Input.GetKeyDown(jumpKey)){
+        if (Input.GetKey(jumpKey)){
             onJump();
         }
         if (!Input.GetKey(jumpKey))

@@ -205,9 +205,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   velocity: {x: 0, y: 0}
-  jumpForce: 20
+  jumpForce: 5
   gravityMultiplier: 100
   dashingPower: 300
+  dashingTime: 0.2
+  dashCooldown: 1
   playerHeight: 1
   checkOffset: 0.5
   groundLayer:

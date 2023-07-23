@@ -18,8 +18,12 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dash")]
     [SerializeField] float dashingPower = 300f;
+    [SerializeField] private float dashingTime = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;
+    Vector2 dashDirection;
     bool isDashing = false;
     bool canDash = true;
+    float gravity = 0;
 
     [Header("CheckGround")]
     [SerializeField] float playerHeight;
@@ -48,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Dash();
+        setDashDirection();
         Move();
         CheckGrounded();
         IncreaseGravity();
@@ -79,9 +85,39 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = Physics2D.Raycast(transform.position, Vector2.down, playerHeight * 0.5f + checkOffset, groundLayer);
     }
+    bool GetGrounded()
+    {
+        return grounded;
+    }
     void Move()
     {
         velocity = playerInput.horizontalInput * speed;
         transform.Translate(velocity * Time.deltaTime);
+    }
+    private IEnumerator DashEnum()
+    {
+        canDash = false;
+        isDashing = true;
+        gravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.AddForce(dashDirection * dashingPower, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = gravity;
+        gravity = 0;
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitUntil(GetGrounded);
+        canDash = true;
+    }
+    void Dash()
+    {
+        if (canDash)
+        {
+            StartCoroutine(DashEnum());
+        }
+    }
+    void setDashDirection()
+    {
+        dashDirection = velocity == Vector2.zero ? transform.forward : velocity;
     }
 }
