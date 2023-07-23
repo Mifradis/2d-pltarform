@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashCooldown = 1f;
     Vector2 dashDirection;
-    bool isDashing = false;
+    bool isDashing;
     bool canDash = true;
     float gravity = 0;
 
@@ -42,17 +42,25 @@ public class PlayerMovement : MonoBehaviour
     {    
         rb = GetComponent<Rigidbody2D>();
         playerInput.onJump += Jump;
+        playerInput.onDash += Dash;
         playerInput.onJumpRelease += CutJump;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isDashing)
+        {
+            return;
+        }
     }
     private void FixedUpdate()
     {
-        Dash();
+        if (isDashing)
+        {
+            return;
+        }
         setDashDirection();
         Move();
         CheckGrounded();
@@ -99,14 +107,14 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         isDashing = true;
         gravity = rb.gravityScale;
-        rb.gravityScale = 0;
-        rb.AddForce(dashDirection * dashingPower, ForceMode2D.Impulse);
+        rb.gravityScale = 0f;
+        //rb.AddForce(dashDirection * dashingPower * Time.deltaTime, ForceMode2D.Impulse);
+        rb.velocity = new Vector2(dashDirection.x * dashingPower, 0f);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = gravity;
-        gravity = 0;
+        gravity = 0f;
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
-        yield return new WaitUntil(GetGrounded);
         canDash = true;
     }
     void Dash()
@@ -118,6 +126,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void setDashDirection()
     {
-        dashDirection = velocity == Vector2.zero ? transform.forward : velocity;
+        dashDirection = velocity == Vector2.zero ? transform.right : velocity;
     }
 }

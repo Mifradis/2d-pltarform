@@ -207,7 +207,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   jumpForce: 5
   gravityMultiplier: 100
-  dashingPower: 300
+  dashingPower: 3
   dashingTime: 0.2
   dashCooldown: 1
   playerHeight: 1
