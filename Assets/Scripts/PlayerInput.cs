@@ -13,11 +13,15 @@ public class PlayerInput : MonoBehaviour
     public Vector2 jumpInput;
     [HideInInspector]
     public Vector2 dashInput;
+    [HideInInspector]
+    public Vector2 shootingInput;
 
     private KeyCode jumpKey = KeyCode.Space;
     private KeyCode dashKey = KeyCode.LeftShift;
+    private KeyCode shootKey = KeyCode.J;
 
     public event Action onJump = delegate { };
+    public event Action onShoot = delegate { };
     public event Action onJumpRelease = delegate { };
     public event Action onDash = delegate { };
     void Start()
@@ -32,6 +36,7 @@ public class PlayerInput : MonoBehaviour
         GetMovementInput();
         GetJumpInput();
         GetDashInput();
+        GetShootInput();
     }
     private void FixedUpdate()
     {
@@ -57,6 +62,13 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(dashKey))
         {
             onDash();
+        }
+    }
+    void GetShootInput()
+    {
+        if (Input.GetKeyDown(shootKey))
+        {
+            onShoot();
         }
     }
 }
