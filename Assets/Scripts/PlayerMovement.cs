@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+        setDashDirection();
     }
     private void FixedUpdate()
     {
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        setDashDirection();
+        
         Move();
         CheckGrounded();
         IncreaseGravity();

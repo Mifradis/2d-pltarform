@@ -29,13 +29,13 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void FixedUpdate()
-    {
         GetMovementInput();
         GetJumpInput();
         GetDashInput();
+    }
+    private void FixedUpdate()
+    {
+        
     }
     void GetMovementInput()
     {
@@ -44,7 +44,7 @@ public class PlayerInput : MonoBehaviour
     }
     void GetJumpInput()
     {
-        if (Input.GetKey(jumpKey)){
+        if (Input.GetKeyDown(jumpKey)){
             onJump();
         }
         if (!Input.GetKey(jumpKey))
