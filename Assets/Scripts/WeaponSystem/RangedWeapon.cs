@@ -6,9 +6,9 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
     [Header("Reloading")]
-    [SerializeField] int currentAmmmo;
-    [SerializeField] int magSize;
-    [SerializeField] float reloadTime;
-    bool reloading;
-    
+    public int currentAmmmo;
+    public int magSize;
+    public float reloadTime;
+    [HideInInspector]
+    public bool reloading = false;
 }

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Sniper Rifle
   damage: 100
-  fireRate: 1
+  fireRate: 60
   "maxD\u0130stance": 100
   currentAmmmo: 5
-  magSize: 25
-  reloadTime: 3
+  magSize: 10
+  reloadTime: 1.5
+  reloading: 0

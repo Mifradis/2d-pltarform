@@ -100,8 +100,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void Move()
     {
-        velocity = playerInput.horizontalInput * speed;
-        transform.Translate(velocity * Time.deltaTime);
+        if (canMove)
+        {
+            velocity = playerInput.horizontalInput * speed;
+            transform.Translate(velocity * Time.deltaTime);
+        }
     }
     private IEnumerator DashEnum()
     {
@@ -109,14 +112,14 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         gravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        //rb.AddForce(dashDirection * dashingPower * Time.deltaTime, ForceMode2D.Impulse);
-        rb.velocity = new Vector2(dashDirection.x * dashingPower, 0f);
+        rb.AddForce(dashDirection * dashingPower * Time.deltaTime, ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(dashDirection.x * dashingPower, 0f);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = gravity;
         gravity = 0f;
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+        canDash = true;   
     }
     void Dash()
     {

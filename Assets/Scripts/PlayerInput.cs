@@ -16,14 +16,16 @@ public class PlayerInput : MonoBehaviour
     [HideInInspector]
     public Vector2 shootingInput;
 
-    private KeyCode jumpKey = KeyCode.Space;
-    private KeyCode dashKey = KeyCode.LeftShift;
-    private KeyCode shootKey = KeyCode.J;
+    KeyCode jumpKey = KeyCode.Space;
+    KeyCode dashKey = KeyCode.LeftShift;
+    KeyCode shootKey = KeyCode.J;
+    KeyCode reloadKey = KeyCode.R;
 
     public event Action onJump = delegate { };
     public event Action onShoot = delegate { };
     public event Action onJumpRelease = delegate { };
     public event Action onDash = delegate { };
+    public event Action onReload = delegate { };
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -37,6 +39,7 @@ public class PlayerInput : MonoBehaviour
         GetJumpInput();
         GetDashInput();
         GetShootInput();
+        GetReloadInput();
     }
     private void FixedUpdate()
     {
@@ -69,6 +72,13 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(shootKey))
         {
             onShoot();
+        }
+    }
+    void GetReloadInput()
+    {
+        if (Input.GetKeyDown(reloadKey))
+        {
+            onReload();
         }
     }
 }

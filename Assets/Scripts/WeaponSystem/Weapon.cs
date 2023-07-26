@@ -8,7 +8,7 @@ public class Weapon : ScriptableObject
     [SerializeField] string weaponName;
 
     [Header("Shooting")]
-    [SerializeField] float damage;
-    [SerializeField] float fireRate;
-    [SerializeField] float maxDÝstance;
+    public float damage;
+    public float fireRate;
+    public float maxDÝstance;
 }
