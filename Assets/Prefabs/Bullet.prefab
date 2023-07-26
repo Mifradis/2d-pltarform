@@ -99,3 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1254744853451621261, guid: 25c42fb5359325e40bc40a343da6ab8d, type: 3}
   speed: 20
+  range: {fileID: 11400000, guid: 8dfcc02431503d04e85ed24a7d33bda7, type: 2}

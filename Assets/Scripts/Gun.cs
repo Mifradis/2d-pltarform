@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    
+    PlayerMovement playerMovement;
     [Header("References")]
     [SerializeField] RangedWeapon gunData;
 
@@ -36,7 +36,15 @@ public class Gun : MonoBehaviour
         if (CanShoot())
         {
             spawnPosition = new Vector2(gunPrefab.transform.position.x, gunPrefab.transform.position.y);
-            GameObject newBullet = (GameObject)Instantiate(bulletPrefab, spawnPosition, Quaternion.Euler(0, 0, 0));
+
+            if (playerMovement.isFacingRight)
+            {
+                GameObject newBullet = (GameObject)Instantiate(bulletPrefab, spawnPosition, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                GameObject newBulletLeft = (GameObject)Instantiate(bulletPrefab, spawnPosition, Quaternion.Euler(0, 0, 180));
+            }
             gunData.currentAmmmo--;
         }
         if(gunData.currentAmmmo <= 0)
@@ -61,6 +69,7 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         shootingInput = GetComponentInParent<PlayerInput>();
+        playerMovement = GetComponentInParent<PlayerMovement>();
     }
     private void Start()
     {

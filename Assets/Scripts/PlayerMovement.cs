@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerInput playerInput;
     Rigidbody2D rb;
+    public bool isFacingRight = true;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -100,10 +101,17 @@ public class PlayerMovement : MonoBehaviour
     }
     void Move()
     {
+        Vector2 localScale = transform.localScale;
         if (canMove)
         {
             velocity = playerInput.horizontalInput * speed;
             transform.Translate(velocity * Time.deltaTime);
+            if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0f)
+            {
+                isFacingRight = !isFacingRight;
+                localScale *= new Vector2(-1,1);
+                transform.localScale = localScale;
+            }   
         }
     }
     private IEnumerator DashEnum()
@@ -132,4 +140,5 @@ public class PlayerMovement : MonoBehaviour
     {
         dashDirection = velocity == Vector2.zero ? transform.right : velocity;
     }
+    
 }

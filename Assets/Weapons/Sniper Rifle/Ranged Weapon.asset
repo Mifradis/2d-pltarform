@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponName: Sniper Rifle
   damage: 100
   fireRate: 60
-  "maxD\u0130stance": 100
-  currentAmmmo: 5
+  "maxD\u0130stance": 25
+  currentAmmmo: 9
   magSize: 10
   reloadTime: 1.5
   reloading: 0
