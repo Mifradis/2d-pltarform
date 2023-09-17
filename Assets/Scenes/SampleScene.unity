@@ -274,9 +274,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 302450510}
-  - component: {fileID: 302450513}
   - component: {fileID: 302450512}
   - component: {fileID: 302450511}
+  - component: {fileID: 302450513}
   m_Layer: 0
   m_Name: Assault Rifle
   m_TagString: Untagged
@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: 4380598ddfacab249847231049d123e6, type: 2}
+  animations: {fileID: 302450513}
   gunPrefab: {fileID: 279304358}
   bulletPrefab: {fileID: 5298768564749119991, guid: bc608c9b3f692634c9d86a1d93a7f716, type: 3}
 --- !u!212 &302450512
@@ -355,7 +356,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -2067592041, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

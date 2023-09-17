@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Assault Rifle
   damage: 25
-  fireRate: 120
+  fireRate: 200
   "maxD\u0130stance": 18
-  currentAmmmo: 16
+  currentAmmmo: 13
   magSize: 20
   reloadTime: 1.5
   reloading: 0

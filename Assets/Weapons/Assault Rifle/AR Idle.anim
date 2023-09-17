@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AR animation
+  m_Name: AR Idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -21,12 +21,6 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: -2067592041, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
-    - time: 0.11666667
-      value: {fileID: -887233832, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
-    - time: 0.21666667
-      value: {fileID: -1809608800, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
-    - time: 0.33333334
-      value: {fileID: 2132668062, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -47,15 +41,12 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: -2067592041, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
-    - {fileID: -887233832, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
-    - {fileID: -1809608800, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
-    - {fileID: 2132668062, guid: 2eed97b564ec1d949a8383064a292829, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

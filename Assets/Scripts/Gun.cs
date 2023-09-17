@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
     PlayerInput shootingInput;
     float attackSpeed;
     float nextBulletSpawn;
+    public Animator animations;
 
     [Header("Bullet")]
     Vector2 spawnPosition;
@@ -35,6 +36,7 @@ public class Gun : MonoBehaviour
     {
         if (CanShoot())
         {
+            animations.SetBool("IsShooting", true);
             spawnPosition = new Vector2(gunPrefab.transform.position.x, gunPrefab.transform.position.y);
 
             if (playerMovement.isFacingRight)
@@ -51,6 +53,7 @@ public class Gun : MonoBehaviour
         {
             StartReload();
         }
+        
     }
     public void StartReload()
     {
@@ -65,6 +68,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(gunData.reloadTime);
         gunData.currentAmmmo = gunData.magSize;
         gunData.reloading = false;
+        animations = GetComponent<Animator>();
     }
     private void Awake()
     {
@@ -76,9 +80,14 @@ public class Gun : MonoBehaviour
         attackSpeed = 1f / (gunData.fireRate / 60f);
         shootingInput.onShoot += Shoot;
         shootingInput.onReload += StartReload;
+        
     }
     private void Update()
     {
-        
+        if(Time.time >= nextBulletSpawn)
+        {
+            animations.SetBool("IsShooting", false);
+        }
+        Debug.Log(animations.GetBool("IsShooting"));
     }
 }
