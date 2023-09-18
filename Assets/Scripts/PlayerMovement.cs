@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerInput playerInput;
     Rigidbody2D rb;
+    public Animator animations;
     public bool isFacingRight = true;
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {    
         rb = GetComponent<Rigidbody2D>();
+        animations = GetComponent<Animator>();
         playerInput.onJump += Jump;
         playerInput.onDash += Dash;
         playerInput.onJumpRelease += CutJump;
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         setDashDirection();
+        animations.SetInteger("Speed", (int)velocity.x);
     }
     private void FixedUpdate()
     {
