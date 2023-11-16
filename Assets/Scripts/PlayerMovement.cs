@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (isDashing)
         {
             return;
@@ -97,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     void CheckGrounded()
     {
         grounded = Physics2D.Raycast(transform.position, Vector2.down, playerHeight * 0.5f + checkOffset, groundLayer);
+        animations.SetBool("Grounded", grounded);
     }
     bool GetGrounded()
     {
