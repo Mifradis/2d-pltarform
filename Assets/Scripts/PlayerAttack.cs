@@ -30,14 +30,14 @@ public class PlayerAttack : MonoBehaviour
         
         if (!(firstAttackTime == 0) && !(secondAttackTime == 0))
         {
-            animator.SetFloat("Combo", secondAttackTime - firstAttackTime);
-            firstAttackTime = Time.time;
+            //animator.SetFloat("Combo", secondAttackTime - firstAttackTime);
+            firstAttackTime = 0;
             secondAttackTime = 0;
         }
-        if(!(firstAttackTime == 0)&&(Time.time - firstAttackTime >= 1))
+        if(!(firstAttackTime == 0)&&(Time.time - firstAttackTime >= 0.5))
         {
             firstAttackTime = 0;
-            animator.SetFloat("Combo", 2);
+            //animator.SetFloat("Combo", 2);
         }
     }
     void Attack()
@@ -48,10 +48,12 @@ public class PlayerAttack : MonoBehaviour
             if ((firstAttackTime == 0))
             {
                 firstAttackTime = Time.time;
+                animator.SetBool("isSecond", false);
             }
             else if(!(firstAttackTime == 0))
             {
                 secondAttackTime = Time.time;
+                animator.SetBool("isSecond", true);
             }
             isHitting = true;
             //animator.SetBool("isSecond", true);
