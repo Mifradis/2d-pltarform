@@ -10,11 +10,16 @@ public class Npc : MonoBehaviour
     public Light spotlight;
     public LayerMask viewMask;
     public float viewDistance;
+    public GameObject hitbox;
+    float takingHitTime = 0;
     float viewAngle;
     Color originalSpotlightColor;
     public Transform player;
+    public Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
+        hitbox = GetComponent<GameObject>();
         viewAngle = spotlight.spotAngle;
         originalSpotlightColor = spotlight.color;
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -32,6 +37,10 @@ public class Npc : MonoBehaviour
             spotlight.color = originalSpotlightColor;
         }
         print(CanSeePlayer());
+        if(Time.time - takingHitTime >= 0.4)
+        {
+            animator.SetBool("TakingHit", false);
+        }
     }
     bool CanSeePlayer()
     {
@@ -48,5 +57,13 @@ public class Npc : MonoBehaviour
             }
         }
         return false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Sword")
+        {
+            animator.SetBool("TakingHit", true);
+            takingHitTime = Time.time;
+        }
     }
 }
