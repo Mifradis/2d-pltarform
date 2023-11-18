@@ -545,6 +545,11 @@ MonoBehaviour:
   hitbox: {fileID: 0}
   player: {fileID: 1347853813}
   animator: {fileID: 0}
+  pointA: {fileID: 0}
+  pointB: {fileID: 0}
+  rb: {fileID: 0}
+  stopMovingWhenTakingHit: 0
+  isFacingRight: 1
 --- !u!1 &373720056
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +620,37 @@ Transform:
   - {fileID: 1510375426}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &402027915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 402027916}
+  m_Layer: 0
+  m_Name: Point A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &402027916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402027915}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23.02, y: -0.46, z: 0.60290754}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &458951246
 GameObject:
@@ -5167,7 +5203,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -5299,7 +5335,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458951246}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -5353,7 +5389,7 @@ MonoBehaviour:
   jumpForce: 15
   gravityMultiplier: 100
   dashingPower: 300
-  dashingTime: 0.2
+  dashingTime: 0.1
   dashCooldown: 1
   playerHeight: 0
   checkOffset: 1
@@ -6293,6 +6329,37 @@ Transform:
   m_Father: {fileID: 1480675772}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1444106864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1444106865}
+  m_Layer: 0
+  m_Name: Point B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1444106865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444106864}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 31.61, y: -0.47, z: 0.60290754}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480675771
 GameObject:
   m_ObjectHideFlags: 0
@@ -6454,7 +6521,7 @@ Rigidbody2D:
   m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -6472,7 +6539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a405cf0bda81d14aa5a517e1490308b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 5
   timeToSpotPlayer: 0.5
   spotlight: {fileID: 2107888935}
   viewMask:
@@ -6482,6 +6549,11 @@ MonoBehaviour:
   hitbox: {fileID: 927580535}
   player: {fileID: 513268083}
   animator: {fileID: 1613872231}
+  pointA: {fileID: 402027915}
+  pointB: {fileID: 1444106864}
+  rb: {fileID: 0}
+  stopMovingWhenTakingHit: 0
+  isFacingRight: 1
 --- !u!60 &1613872227
 PolygonCollider2D:
   m_ObjectHideFlags: 0
