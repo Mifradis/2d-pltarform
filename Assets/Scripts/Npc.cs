@@ -5,7 +5,8 @@ using UnityEngine;
 public class Npc : MonoBehaviour
 {
     public static event System.Action OnGuardHasSpottedPlayer;
-    public float speed = 8;
+    public float speed = 5;
+    Vector2 velocity;
     public float timeToSpotPlayer = .5f;
     public Light spotlight;
     public LayerMask viewMask;
@@ -16,9 +17,16 @@ public class Npc : MonoBehaviour
     Color originalSpotlightColor;
     public Transform player;
     public Animator animator;
+    public GameObject pointA;
+    public GameObject pointB;
+    Rigidbody2D rb;
+    Transform currentPoint;
+    public bool isFacingRight = true;
     void Start()
     {
+        currentPoint = pointB.transform;
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<GameObject>();
         viewAngle = spotlight.spotAngle;
         originalSpotlightColor = spotlight.color;
@@ -28,6 +36,7 @@ public class Npc : MonoBehaviour
 
     void Update()
     {
+        animator.SetInteger("Speed", (int)speed);
         if (CanSeePlayer())
         {
             spotlight.color = Color.red;
@@ -42,7 +51,39 @@ public class Npc : MonoBehaviour
             animator.SetBool("TakingHit", false);
         }
     }
-    bool CanSeePlayer()
+    private void FixedUpdate()
+    {
+        Movement();
+    }
+    void Movement()
+    {
+        Vector2 localScale = transform.localScale;
+        if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            localScale *= new Vector2(-1, 1);
+            transform.localScale = localScale;
+        }
+        if (currentPoint == pointB.transform)
+        {
+            rb.velocity = new Vector2(speed, 0);
+            velocity = rb.velocity;
+        }
+        else
+        {
+            rb.velocity = new Vector2(-speed, 0);
+            velocity = rb.velocity;
+        }
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+        {
+            currentPoint = pointA.transform;
+        }
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
+        {
+            currentPoint = pointB.transform;
+        }
+    }
+        bool CanSeePlayer()
     {
         if(Vector2.Distance(transform.position, player.position) < viewDistance)
         {
