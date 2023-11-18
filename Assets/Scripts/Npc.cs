@@ -19,8 +19,10 @@ public class Npc : MonoBehaviour
     public Animator animator;
     public GameObject pointA;
     public GameObject pointB;
-    Rigidbody2D rb;
+    [SerializeField]Rigidbody2D rb;
     Transform currentPoint;
+    public float stopMovingWhenTakingHit = 0;
+    float speedBeforeTakeHit;
     public bool isFacingRight = true;
     void Start()
     {
@@ -36,6 +38,11 @@ public class Npc : MonoBehaviour
 
     void Update()
     {
+        if (animator.GetBool("TakingHit"))
+        {
+            speedBeforeTakeHit = rb.velocity.x;
+            speed = 0;
+        }
         animator.SetInteger("Speed", (int)speed);
         if (CanSeePlayer())
         {
