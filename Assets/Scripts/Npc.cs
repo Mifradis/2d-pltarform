@@ -38,7 +38,7 @@ public class Npc : MonoBehaviour
 
     void Update()
     {
-        if (animator.GetBool("TakingHit"))
+        if (animator.GetBool("TakingHit")||animator.GetBool("isAttacking"))
         {
             speedBeforeTakeHit = rb.velocity.x;
             speed = 0;
@@ -61,6 +61,7 @@ public class Npc : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+        Attack();
     }
     void Movement()
     {
@@ -105,6 +106,20 @@ public class Npc : MonoBehaviour
             }
         }
         return false;
+    }
+    void Attack()
+    {
+        if (!animator.GetBool("TakingHit"))
+        {
+            if (Mathf.Abs(player.position.x - transform.position.x) <= 1)
+            {
+                animator.SetBool("isAttacking", true);
+            }
+            else
+            {
+                animator.SetBool("isAttacking", false);
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

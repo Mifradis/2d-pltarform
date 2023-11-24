@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerInput playerInput;
     Rigidbody2D rb;
+    float takingHitTime = 0;
     public Animator animations;
     public bool isFacingRight = true;
     private void Awake()
@@ -60,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
         }
         setDashDirection();
         animations.SetInteger("Speed", (int)velocity.x);
+        if (Time.time - takingHitTime >= 0.4)
+        {
+            animations.SetBool("TakingHit", false);
+        }
     }
     private void FixedUpdate()
     {
@@ -145,5 +150,12 @@ public class PlayerMovement : MonoBehaviour
     {
         dashDirection = velocity == Vector2.zero ? transform.right : velocity;
     }
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemySword")
+        {
+            animations.SetBool("TakingHit", true);
+            takingHitTime = Time.time;
+        }
+    }
 }
