@@ -38,11 +38,7 @@ public class Npc : MonoBehaviour
 
     void Update()
     {
-        if (animator.GetBool("TakingHit")||animator.GetBool("isAttacking"))
-        {
-            speedBeforeTakeHit = rb.velocity.x;
-            speed = 0;
-        }
+        
         animator.SetInteger("Speed", (int)speed);
         if (CanSeePlayer())
         {
@@ -65,30 +61,33 @@ public class Npc : MonoBehaviour
     }
     void Movement()
     {
-        Vector2 localScale = transform.localScale;
-        if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0f)
+        if (CanMove())
         {
-            isFacingRight = !isFacingRight;
-            localScale *= new Vector2(-1, 1);
-            transform.localScale = localScale;
-        }
-        if (currentPoint == pointB.transform)
-        {
-            rb.velocity = new Vector2(speed, 0);
-            velocity = rb.velocity;
-        }
-        else
-        {
-            rb.velocity = new Vector2(-speed, 0);
-            velocity = rb.velocity;
-        }
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
-        {
-            currentPoint = pointA.transform;
-        }
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
-        {
-            currentPoint = pointB.transform;
+            Vector2 localScale = transform.localScale;
+            if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0f)
+            {
+                isFacingRight = !isFacingRight;
+                localScale *= new Vector2(-1, 1);
+                transform.localScale = localScale;
+            }
+            if (currentPoint == pointB.transform)
+            {
+                rb.velocity = new Vector2(speed, 0);
+                velocity = rb.velocity;
+            }
+            else
+            {
+                rb.velocity = new Vector2(-speed, 0);
+                velocity = rb.velocity;
+            }
+            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+            {
+                currentPoint = pointA.transform;
+            }
+            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
+            {
+                currentPoint = pointB.transform;
+            }
         }
     }
         bool CanSeePlayer()
@@ -127,6 +126,17 @@ public class Npc : MonoBehaviour
         {
             animator.SetBool("TakingHit", true);
             takingHitTime = Time.time;
+        }
+    }
+    bool CanMove()
+    {
+        if (animator.GetBool("TakingHit") || animator.GetBool("isAttacking"))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }

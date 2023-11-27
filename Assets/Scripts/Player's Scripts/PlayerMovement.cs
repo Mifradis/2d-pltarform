@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (isDashing)
         {
             return;
@@ -112,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         Vector2 localScale = transform.localScale;
-        if (canMove)
+        if (CanMove())
         {
             velocity = playerInput.horizontalInput * speed;
             transform.Translate(velocity * Time.deltaTime);
@@ -156,6 +155,17 @@ public class PlayerMovement : MonoBehaviour
         {
             animations.SetBool("TakingHit", true);
             takingHitTime = Time.time;
+        }
+    }
+    bool CanMove()
+    {
+        if (animations.GetBool("TakingHit") || animations.GetBool("isAttacking") || isDashing)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }
