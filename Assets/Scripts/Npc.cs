@@ -92,7 +92,7 @@ public class Npc : MonoBehaviour
     }
         bool CanSeePlayer()
     {
-        if(Vector2.Distance(transform.position, player.position) < viewDistance)
+        if(Vector2.Distance(transform.position, player.position) <= viewDistance)
         {
             Vector2 dirToPlayer = (player.position - transform.position);
             float angleBetweenGuardAndPlayer = Vector2.Angle(transform.right, dirToPlayer);

@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
     }
     bool CanMove()
     {
-        if (animations.GetBool("TakingHit") || animations.GetBool("isAttacking") || isDashing)
+        if (animations.GetBool("TakingHit") || animations.GetBool("Attacking") || isDashing)
         {
             return false;
         }

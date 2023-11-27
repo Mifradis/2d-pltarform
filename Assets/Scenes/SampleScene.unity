@@ -6593,7 +6593,7 @@ MonoBehaviour:
   viewMask:
     serializedVersion: 2
     m_Bits: 64
-  viewDistance: 0
+  viewDistance: 10
   hitbox: {fileID: 927580535}
   player: {fileID: 513268083}
   animator: {fileID: 1613872231}
