@@ -535,13 +535,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a405cf0bda81d14aa5a517e1490308b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  timeToSpotPlayer: 0.5
+  enemyData: {fileID: 0}
+  playersDamge: {fileID: 0}
   spotlight: {fileID: 2107888935}
   viewMask:
     serializedVersion: 2
     m_Bits: 64
-  viewDistance: 10
   hitbox: {fileID: 0}
   player: {fileID: 1347853813}
   animator: {fileID: 0}
@@ -550,6 +549,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   stopMovingWhenTakingHit: 0
   isFacingRight: 1
+  hpBar: {fileID: 0}
 --- !u!1 &373720056
 GameObject:
   m_ObjectHideFlags: 0
@@ -5580,6 +5580,17 @@ Transform:
   m_Father: {fileID: 1480675772}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1284513648 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+  m_PrefabInstance: {fileID: 3421948328563496131}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102c9898579fa874ab7c78ce3095810e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1321283781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5826,6 +5837,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   feet: {fileID: 0}
+  damage: 0
+  healthPoint: 0
   animations: {fileID: 1347853811}
   isFacingRight: 1
 --- !u!114 &1347853815
@@ -6169,6 +6182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1746277938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7758504846401917277, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
+  m_PrefabInstance: {fileID: 6565476792958359917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1827158465
 GameObject:
   m_ObjectHideFlags: 0
@@ -6590,6 +6608,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: damage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: healthPoint
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3421948328992247215, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: m_Name
       value: Knight
@@ -6696,6 +6722,10 @@ PrefabInstance:
       value: Enemy1
       objectReference: {fileID: 0}
     - target: {fileID: 6565476794570056975, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
+      propertyPath: hpBar
+      value: 
+      objectReference: {fileID: 1746277938}
+    - target: {fileID: 6565476794570056975, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
       propertyPath: hitbox
       value: 
       objectReference: {fileID: 927580535}
@@ -6711,5 +6741,13 @@ PrefabInstance:
       propertyPath: pointB
       value: 
       objectReference: {fileID: 1444106864}
+    - target: {fileID: 6565476794570056975, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
+      propertyPath: enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 672c2a19610535c41b035434a19205a3, type: 2}
+    - target: {fileID: 6565476794570056975, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
+      propertyPath: playersDamge
+      value: 
+      objectReference: {fileID: 1284513648}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
