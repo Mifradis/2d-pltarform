@@ -8,6 +8,7 @@ public class Npc : MonoBehaviour
     [SerializeField] Enemy enemyData;
 
     public static event System.Action OnGuardHasSpottedPlayer;
+    public PlayerMovement playersDamge;
     public Light spotlight;
     public LayerMask viewMask;
     public GameObject hitbox;
@@ -22,6 +23,9 @@ public class Npc : MonoBehaviour
     public float stopMovingWhenTakingHit = 0;
     float speedBeforeTakeHit;
     public bool isFacingRight = true;
+    float destroyingTime = 0;
+    public GameObject hpBar;
+    float staticScaleX;
     void Start()
     {
         currentPoint = pointB.transform;
@@ -32,13 +36,21 @@ public class Npc : MonoBehaviour
         originalSpotlightColor = spotlight.color;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         originalSpotlightColor = spotlight.color;
+        enemyData.hp = enemyData.maxHp;
+        staticScaleX = hpBar.transform.localScale.x;
+        
     }
 
     void Update()
     {
-        
+        if(enemyData.hp == 0 && destroyingTime != 0)
+        {
+            if(Time.time == destroyingTime + 3)
+            {       
+                Destroy(gameObject);
+            }
+        }
         animator.SetInteger("Speed", (int) enemyData.speed);
-        animator.SetInteger("HealthPoint", (int) enemyData.hp);
         if (CanSeePlayer())
         {
             spotlight.color = Color.red;
@@ -125,6 +137,7 @@ public class Npc : MonoBehaviour
         {
             animator.SetBool("TakingHit", true);
             takingHitTime = Time.time;
+            takingDamage();
         }
     }
     bool CanMove()
@@ -136,6 +149,20 @@ public class Npc : MonoBehaviour
         else
         {
             return true;
+        }
+    }
+    void takingDamage()
+    {
+        enemyData.hp -= playersDamge.damage;
+        float scaleX = hpBar.transform.localScale.x;
+        hpBar.gameObject.transform.localScale = new Vector2((scaleX - (staticScaleX * (playersDamge.damage / enemyData.maxHp))), hpBar.transform.localScale.y);
+        float positionX = ((staticScaleX * (playersDamge.damage / enemyData.maxHp))) / 2;
+        hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
+        if (enemyData.hp <= 0)
+        {   
+            destroyingTime = Time.time;
+            animator.SetTrigger("Death");
+            rb.bodyType = RigidbodyType2D.Static;
         }
     }
 }

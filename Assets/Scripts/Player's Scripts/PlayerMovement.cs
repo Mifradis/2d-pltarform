@@ -33,10 +33,11 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerInput playerInput;
     Rigidbody2D rb;
-    [SerializeField] float damage;
+    public float damage;
     [SerializeField] float healthPoint;
     float takingHitTime = 0;
     public Animator animations;
+   
     public bool isFacingRight = true;
     private void Awake()
     {
@@ -50,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
         playerInput.onJump += Jump;
         playerInput.onDash += Dash;
         playerInput.onJumpRelease += CutJump;
-        
     }
 
     // Update is called once per frame
