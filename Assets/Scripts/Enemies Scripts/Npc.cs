@@ -37,7 +37,8 @@ public class Npc : MonoBehaviour
     void Update()
     {
         
-        animator.SetInteger("enemyData.speed", (int)enemyData.speed);
+        animator.SetInteger("Speed", (int) enemyData.speed);
+        animator.SetInteger("HealthPoint", (int) enemyData.hp);
         if (CanSeePlayer())
         {
             spotlight.color = Color.red;

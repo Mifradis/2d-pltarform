@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerInput playerInput;
     Rigidbody2D rb;
+    [SerializeField] float damage;
+    [SerializeField] float healthPoint;
     float takingHitTime = 0;
     public Animator animations;
     public bool isFacingRight = true;
@@ -60,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         }
         setDashDirection();
         animations.SetInteger("Speed", (int)velocity.x);
+        animations.SetInteger("Y velocity", (int)rb.velocity.y);
         if (Time.time - takingHitTime >= 0.4)
         {
             animations.SetBool("TakingHit", false);
@@ -85,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        if (grounded)
+        if (rb.velocity.y == 0)
         {
             jumpCancelled = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -93,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void CutJump()
     {
-        if(!grounded && !jumpCancelled)
+        if(rb.velocity.y != 0 && !jumpCancelled)
         {
             jumpCancelled = true;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.3f);
