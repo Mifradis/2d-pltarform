@@ -9,8 +9,12 @@ public class Enemy : ScriptableObject
     [SerializeField] int enemyTier;
 
     [Header("Features")]
-    [SerializeField] float hp;
-    [SerializeField] float damage;
-    [SerializeField] float fireRate;
-    [SerializeField] float viewDistance;
+    public float hp;
+    public float damage;
+    public float fireRate;
+    public float viewDistance;
+    public float speed;
+    public Vector2 velocity;
+    public float timeToSpotPlayer;
+    public float viewAngle;
 }

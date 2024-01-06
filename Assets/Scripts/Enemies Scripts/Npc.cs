@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Npc : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] Enemy enemyData;
+
     public static event System.Action OnGuardHasSpottedPlayer;
-    public float speed = 5;
-    Vector2 velocity;
-    public float timeToSpotPlayer = .5f;
     public Light spotlight;
     public LayerMask viewMask;
-    public float viewDistance;
     public GameObject hitbox;
     float takingHitTime = 0;
-    float viewAngle;
     Color originalSpotlightColor;
     public Transform player;
     public Animator animator;
@@ -30,7 +28,7 @@ public class Npc : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<GameObject>();
-        viewAngle = spotlight.spotAngle;
+        enemyData.viewAngle = spotlight.spotAngle;
         originalSpotlightColor = spotlight.color;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         originalSpotlightColor = spotlight.color;
@@ -39,7 +37,7 @@ public class Npc : MonoBehaviour
     void Update()
     {
         
-        animator.SetInteger("Speed", (int)speed);
+        animator.SetInteger("enemyData.speed", (int)enemyData.speed);
         if (CanSeePlayer())
         {
             spotlight.color = Color.red;
@@ -64,7 +62,7 @@ public class Npc : MonoBehaviour
         if (CanMove())
         {
             Vector2 localScale = transform.localScale;
-            if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0f)
+            if (isFacingRight && enemyData.velocity.x < 0f || !isFacingRight && enemyData.velocity.x > 0f)
             {
                 isFacingRight = !isFacingRight;
                 localScale *= new Vector2(-1, 1);
@@ -72,13 +70,13 @@ public class Npc : MonoBehaviour
             }
             if (currentPoint == pointB.transform)
             {
-                rb.velocity = new Vector2(speed, 0);
-                velocity = rb.velocity;
+                rb.velocity = new Vector2(enemyData.speed, 0);
+                enemyData.velocity = rb.velocity;
             }
             else
             {
-                rb.velocity = new Vector2(-speed, 0);
-                velocity = rb.velocity;
+                rb.velocity = new Vector2(-enemyData.speed, 0);
+                enemyData.velocity = rb.velocity;
             }
             if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
             {
@@ -92,11 +90,11 @@ public class Npc : MonoBehaviour
     }
         bool CanSeePlayer()
     {
-        if(Vector2.Distance(transform.position, player.position) <= viewDistance)
+        if(Vector2.Distance(transform.position, player.position) <= enemyData.viewDistance)
         {
             Vector2 dirToPlayer = (player.position - transform.position);
             float angleBetweenGuardAndPlayer = Vector2.Angle(transform.right, dirToPlayer);
-            if(angleBetweenGuardAndPlayer < viewAngle)
+            if(angleBetweenGuardAndPlayer < enemyData.viewAngle)
             {
                 if(Physics2D.Linecast(transform.position, player.position, viewMask))
                 {
