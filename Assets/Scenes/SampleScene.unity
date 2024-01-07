@@ -6721,6 +6721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 6565476794570056973, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6565476794570056975, guid: 6bc0da82aab9ac34db6b4a8bb2137426, type: 3}
       propertyPath: hpBar
       value: 

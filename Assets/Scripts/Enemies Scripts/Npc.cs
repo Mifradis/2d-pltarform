@@ -43,7 +43,7 @@ public class Npc : MonoBehaviour
 
     void Update()
     {
-        if(enemyData.hp == 0 && destroyingTime != 0)
+        if(destroyingTime != 0)
         {
             if(Time.time == destroyingTime + 3)
             {       
