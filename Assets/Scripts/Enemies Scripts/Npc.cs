@@ -26,6 +26,7 @@ public class Npc : MonoBehaviour
     float destroyingTime = 0;
     public GameObject hpBar;
     float staticScaleX;
+    Collider2D enemyCollider;
     void Start()
     {
         currentPoint = pointB.transform;
@@ -38,14 +39,15 @@ public class Npc : MonoBehaviour
         originalSpotlightColor = spotlight.color;
         enemyData.hp = enemyData.maxHp;
         staticScaleX = hpBar.transform.localScale.x;
-        
+        enemyCollider = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
+        print(destroyingTime);
         if(destroyingTime != 0)
         {
-            if(Time.time == destroyingTime + 3)
+            if(Time.time >= destroyingTime + 3)
             {       
                 Destroy(gameObject);
             }
@@ -163,6 +165,7 @@ public class Npc : MonoBehaviour
             destroyingTime = Time.time;
             animator.SetTrigger("Death");
             rb.bodyType = RigidbodyType2D.Static;
+            Destroy(enemyCollider);
         }
     }
 }
