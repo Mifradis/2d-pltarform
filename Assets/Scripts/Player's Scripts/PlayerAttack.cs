@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
             firstAttackTime = 0;
             secondAttackTime = 0;
         }
-        if(!(firstAttackTime == 0)&&(Time.time - firstAttackTime >= 0.5))
+        if(!(firstAttackTime == 0)&&(Time.time - firstAttackTime >= 0.8))
         {
             firstAttackTime = 0;
             //animator.SetFloat("Combo", 2);

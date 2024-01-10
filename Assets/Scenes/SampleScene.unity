@@ -6600,8 +6600,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.051763892, y: -0.14074004}
-  m_Size: {x: 0.020709276, y: 0.18541002}
+  m_Offset: {x: 0.051572084, y: -0.14074004}
+  m_Size: {x: 0.033164024, y: 0.18541002}
   m_Direction: 0
 --- !u!108 &2107888935 stripped
 Light:
@@ -6676,6 +6676,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3421948328992247212, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: damage
       value: 25

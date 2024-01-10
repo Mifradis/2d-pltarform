@@ -135,11 +135,14 @@ public class Npc : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Sword")
+        if (!animator.GetBool("TakingHit"))
         {
-            animator.SetBool("TakingHit", true);
-            takingHitTime = Time.time;
-            takingDamage();
+            if (collision.tag == "Sword")
+            {
+                animator.SetBool("TakingHit", true);
+                takingHitTime = Time.time;
+                takingDamage();
+            }
         }
     }
     bool CanMove()
