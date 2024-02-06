@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public Animator animator;
     float firstAttackTime = 0;
     float secondAttackTime = 0;
+    int attackTurn = 0;
     void Start()
     {
         attackInp = GetComponent<PlayerInput>();
@@ -22,21 +23,23 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         
+        
         if (Time.time > nextAttackTime)
         {
             isHitting = false;
         }
         animator.SetBool("Attacking", isHitting);
-        
-        if (!(firstAttackTime == 0) && !(secondAttackTime == 0))
+        animator.SetInteger("attackTurn", attackTurn);
+        if(attackTurn > 4)
         {
-            //animator.SetFloat("Combo", secondAttackTime - firstAttackTime);
-            firstAttackTime = 0;
-            secondAttackTime = 0;
+            attackTurn = 0;
         }
+        
+        
         if(!(firstAttackTime == 0)&&(Time.time - firstAttackTime >= 0.8))
         {
             firstAttackTime = 0;
+            attackTurn = 0;
             //animator.SetFloat("Combo", 2);
         }
     }
@@ -45,18 +48,16 @@ public class PlayerAttack : MonoBehaviour
         
         if (CanAttack())
         {
-            if ((firstAttackTime == 0))
-            {
-                firstAttackTime = Time.time;
-                animator.SetBool("isSecond", false);
-            }
-            else if(!(firstAttackTime == 0))
-            {
-                secondAttackTime = Time.time;
-                animator.SetBool("isSecond", true);
-            }
             isHitting = true;
-            //animator.SetBool("isSecond", true);
+            firstAttackTime = Time.time;
+            if(attackTurn >= 4)
+            {
+                attackTurn = 0;
+            }
+            else
+            {
+                attackTurn++;
+            }
         }
     }
     bool CanAttack() {
