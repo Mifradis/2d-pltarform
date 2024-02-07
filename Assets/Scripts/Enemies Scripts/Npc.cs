@@ -14,6 +14,7 @@ public class Npc : MonoBehaviour
     public GameObject hitbox;
     float takingHitTime = 0;
     Color originalSpotlightColor;
+    float nextAttackTime;
     public Transform player;
     public Animator animator;
     public GameObject pointA;
@@ -62,10 +63,11 @@ public class Npc : MonoBehaviour
             spotlight.color = originalSpotlightColor;
         }
         print(CanSeePlayer());
-        if(Time.time - takingHitTime >= 0.4)
+        if(Time.time - takingHitTime >= 0.4f)
         {
             animator.SetBool("TakingHit", false);
         }
+        animator.SetBool("CanMove", CanMove());
     }
     private void FixedUpdate()
     {
@@ -123,8 +125,9 @@ public class Npc : MonoBehaviour
     {
         if (!animator.GetBool("TakingHit"))
         {
-            if (Mathf.Abs(player.position.x - transform.position.x) <= 1)
+            if (Mathf.Abs(player.position.x - transform.position.x) <= 1 && Time.time > nextAttackTime)
             {
+                nextAttackTime = Time.time + enemyData.fireRate;
                 animator.SetBool("isAttacking", true);
             }
             else
@@ -147,7 +150,7 @@ public class Npc : MonoBehaviour
     }
     bool CanMove()
     {
-        if (animator.GetBool("TakingHit") || animator.GetBool("isAttacking"))
+        if (animator.GetBool("TakingHit") || animator.GetBool("isAttacking") || Mathf.Abs(player.position.x - transform.position.x) <= 1)
         {
             return false;
         }

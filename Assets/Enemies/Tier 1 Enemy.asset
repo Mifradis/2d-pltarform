@@ -15,9 +15,9 @@ MonoBehaviour:
   enemyName: Cop
   enemyTier: 1
   maxHp: 100
-  hp: 0
+  hp: 100
   damage: 10
-  fireRate: 0
+  fireRate: 3
   viewDistance: 10
   speed: 5
   velocity: {x: -5, y: 0}
