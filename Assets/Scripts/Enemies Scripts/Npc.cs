@@ -28,8 +28,13 @@ public class Npc : MonoBehaviour
     public GameObject hpBar;
     float staticScaleX;
     Collider2D enemyCollider;
+    float angleBetweenGuardAndPlayer;
+    [SerializeField]GameObject Player;
+    bool isPlayerSpotted;
+    bool flip;
     void Start()
     {
+        isPlayerSpotted = false;
         currentPoint = pointB.transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -45,7 +50,6 @@ public class Npc : MonoBehaviour
 
     void Update()
     {
-        print(destroyingTime);
         if(destroyingTime != 0)
         {
             if(Time.time >= destroyingTime + 3)
@@ -62,7 +66,7 @@ public class Npc : MonoBehaviour
         {
             spotlight.color = originalSpotlightColor;
         }
-        print(CanSeePlayer());
+        print(isPlayerSpotted);
         if(Time.time - takingHitTime >= 0.4f)
         {
             animator.SetBool("TakingHit", false);
@@ -87,38 +91,51 @@ public class Npc : MonoBehaviour
             }
             if (currentPoint == pointB.transform)
             {
-                rb.velocity = new Vector2(enemyData.speed, 0);
+                rb.velocity = new Vector2(enemyData.speed, rb.velocity.y);
                 enemyData.velocity = rb.velocity;
             }
             else
             {
-                rb.velocity = new Vector2(-enemyData.speed, 0);
+                rb.velocity = new Vector2(-enemyData.speed, rb.velocity.y);
                 enemyData.velocity = rb.velocity;
             }
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
-            {
-                currentPoint = pointA.transform;
-            }
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
-            {
-                currentPoint = pointB.transform;
-            }
+            
+       
+                if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+                {
+                    currentPoint = pointA.transform;
+                }
+                if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
+                {
+                    currentPoint = pointB.transform;
+                }
+            
         }
     }
-        bool CanSeePlayer()
+    bool CanSeePlayer()
     {
-        if(Vector2.Distance(transform.position, player.position) <= enemyData.viewDistance)
-        {
-            Vector2 dirToPlayer = (player.position - transform.position);
-            float angleBetweenGuardAndPlayer = Vector2.Angle(transform.right, dirToPlayer);
-            if(angleBetweenGuardAndPlayer < enemyData.viewAngle)
+        
+        
+            if(Vector2.Distance(transform.position, player.position) <= enemyData.viewDistance)
             {
-                if(Physics2D.Linecast(transform.position, player.position, viewMask))
+                
+            Vector2 dirToPlayer = (player.position - transform.position);
+            if (isFacingRight)
+            {
+                angleBetweenGuardAndPlayer = Vector2.Angle(transform.right, dirToPlayer);
+            }if(!isFacingRight)
+            {
+                angleBetweenGuardAndPlayer = Vector2.Angle(-transform.right, dirToPlayer);
+            }
+                if(angleBetweenGuardAndPlayer < enemyData.viewAngle)
                 {
-                    return true;
+                    if(Physics2D.Raycast(transform.position, Player.transform.position, viewMask))
+                    {
+                        isPlayerSpotted = true;
+                        return true;
+                    }
                 }
             }
-        }
         return false;
     }
     void Attack()

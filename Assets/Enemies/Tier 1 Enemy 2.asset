@@ -18,8 +18,8 @@ MonoBehaviour:
   hp: 250
   damage: 25
   fireRate: 3
-  viewDistance: 20
+  viewDistance: 10
   speed: 2
-  velocity: {x: 2, y: 0}
+  velocity: {x: 2, y: -0.0000010728836}
   timeToSpotPlayer: 0.5
   viewAngle: 29.3
