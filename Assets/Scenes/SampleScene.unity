@@ -14388,8 +14388,16 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: dashingTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: healthPoint
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: dashingPower
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3421948328992247215, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: m_Name

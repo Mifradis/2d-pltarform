@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 dashDirection;
     bool isDashing;
     bool canDash = true;
+    Vector2 realVelocity;
     float gravity = 0;
 
     [Header("CheckGround")]
@@ -128,22 +130,26 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator DashEnum()
     {
+        realVelocity = rb.velocity;
         canDash = false;
         isDashing = true;
+        animations.SetBool("isDashing", true);
         gravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.AddForce(dashDirection * dashingPower * Time.deltaTime, ForceMode2D.Impulse);
-        //rb.velocity = new Vector2(dashDirection.x * dashingPower, 0f);
+        //rb.AddForce(dashDirection * dashingPower * Time.deltaTime, ForceMode2D.Impulse);
+        rb.velocity = new Vector2(dashDirection.x * dashingPower, 0f);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = gravity;
         gravity = 0f;
         isDashing = false;
+        animations.SetBool("isDashing", false);
+        rb.velocity = realVelocity;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;   
     }
     void Dash()
     {
-        if (canDash)
+        if (canDash && rb.velocity.y == 0 && velocity.x != 0)
         {
             StartCoroutine(DashEnum());
         }

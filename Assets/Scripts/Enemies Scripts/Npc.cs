@@ -129,7 +129,7 @@ public class Npc : MonoBehaviour
             }
                 if(angleBetweenGuardAndPlayer < enemyData.viewAngle)
                 {
-                    if(Physics2D.Raycast(transform.position, Player.transform.position, viewMask))
+                    if(Physics2D.Raycast(transform.position, player.transform.position, viewMask))
                     {
                         isPlayerSpotted = true;
                         return true;
