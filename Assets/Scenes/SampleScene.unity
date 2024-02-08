@@ -13129,6 +13129,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   feet: {fileID: 0}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   damage: 0
   healthPoint: 0
   animations: {fileID: 1347853811}
@@ -14310,6 +14316,10 @@ PrefabInstance:
       propertyPath: playersDamge
       value: 
       objectReference: {fileID: 1284513648}
+    - target: {fileID: 4861075281527783242, guid: 3b804967e6687c642b6ef56680395004, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4861075282446713358, guid: 3b804967e6687c642b6ef56680395004, type: 3}
       propertyPath: m_Size.x
       value: 0.3982229
@@ -14343,6 +14353,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3421948328308184500, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3421948328308184506, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: m_Size.x
       value: 0.5
@@ -14414,6 +14428,14 @@ PrefabInstance:
     - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: dashingPower
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: enemyMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 3421948328992247214, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 3421948328992247215, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: m_Name
@@ -14535,6 +14557,14 @@ PrefabInstance:
     - target: {fileID: 5020284789175579410, guid: 5e472498cef68af499420e6c708b071e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711046288970341816, guid: 5e472498cef68af499420e6c708b071e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711046288970341816, guid: 5e472498cef68af499420e6c708b071e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6711046288970341817, guid: 5e472498cef68af499420e6c708b071e, type: 3}
       propertyPath: m_Mass

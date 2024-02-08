@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform feet;
 
+    [SerializeField] LayerMask enemyMask;
+    [SerializeField] LayerMask playerMask;
     PlayerInput playerInput;
     Rigidbody2D rb;
     public float damage;
@@ -53,11 +55,13 @@ public class PlayerMovement : MonoBehaviour
         playerInput.onJump += Jump;
         playerInput.onDash += Dash;
         playerInput.onJumpRelease += CutJump;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Physics2D.IgnoreLayerCollision(6, 7);
         if (isDashing)
         {
             return;
