@@ -18,6 +18,7 @@ public class Npc : MonoBehaviour
     float nextAttackTime;
     public Transform player;
     public Animator animator;
+    [SerializeField] Transform jumpControllerTransform;
     public GameObject pointA;
     public GameObject pointB;
     [SerializeField]Rigidbody2D rb;
@@ -38,6 +39,7 @@ public class Npc : MonoBehaviour
     {
         isPlayerSpotted = false;
         currentPoint = pointB.transform;
+        jumpControllerTransform = GameObject.FindGameObjectWithTag("EnemyJumpController").transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<GameObject>();
@@ -60,7 +62,7 @@ public class Npc : MonoBehaviour
             }
         }
         animator.SetInteger("Speed", (int) enemyData.speed);
-        animator.SetInteger("YAxis", (int)rb.velocity.y);
+        animator.SetInteger("Y-axis", (int) rb.velocity.y);
         if (CanSeePlayer())
         {
             spotlight.color = Color.red;
@@ -97,12 +99,12 @@ public class Npc : MonoBehaviour
             {         
                 if (currentPoint == pointB.transform)
                 {
-                    rb.velocity = new Vector2(enemyData.speed, rb.velocity.y);
+                    rb.velocity = new Vector2(enemyData.speed * Time.deltaTime, rb.velocity.y);
                     enemyData.velocity = rb.velocity;
                 }
                 else
                 {
-                    rb.velocity = new Vector2(-enemyData.speed, rb.velocity.y);
+                    rb.velocity = new Vector2(-enemyData.speed * Time.deltaTime, rb.velocity.y);
                     enemyData.velocity = rb.velocity;
                 }
                 if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
@@ -116,13 +118,13 @@ public class Npc : MonoBehaviour
             }
             else if(player.transform.position.x > transform.position.x)
             {
-                rb.velocity = new Vector2(enemyData.speed, rb.velocity.y);
+                rb.velocity = new Vector2(enemyData.speed * Time.deltaTime, rb.velocity.y);
                 enemyData.velocity = rb.velocity;
             }
             else if(player.transform.position.x < transform.position.x)
             {
                 print(-enemyData.speed);
-                rb.velocity = new Vector2(-enemyData.speed, rb.velocity.y);
+                rb.velocity = new Vector2(-enemyData.speed * Time.deltaTime, rb.velocity.y);
                 enemyData.velocity = rb.velocity;
             }
         }
@@ -207,11 +209,27 @@ public class Npc : MonoBehaviour
     }
     void Jump()
     {
+        RaycastHit2D jumpController;
+        if (isFacingRight)
+        {
+            jumpController = Physics2D.Raycast(jumpControllerTransform.position, jumpControllerTransform.right*0.2f, 5f);
+            Debug.DrawRay(jumpControllerTransform.position, jumpControllerTransform.right * 0.2f, Color.green);
+        }
+        else
+        {
+            jumpController = Physics2D.Raycast(jumpControllerTransform.position, -jumpControllerTransform.right*0.2f, 0.2f);
+            Debug.DrawRay(jumpControllerTransform.position, -jumpControllerTransform.right * 0.2f, Color.green);
+        }
+
         if (rb.velocity.y == 0)
         {
-            if (Physics2D.Raycast(transform.position, transform.right, 2).collider.tag == "Ground" || Physics2D.Raycast(transform.position, -transform.right, 2).collider.tag == "Ground")
+            if (jumpController.collider != null)
             {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                print(jumpController.collider.tag);
+                if (jumpController.collider.tag == "Ground")
+                {
+                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                }
             }
         }
     }

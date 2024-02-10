@@ -262,6 +262,7 @@ Transform:
   - {fileID: 6565476794227051589}
   - {fileID: 6565476792535423054}
   - {fileID: 5822955304832344678}
+  - {fileID: 2927594637119254684}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -372,18 +373,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
+  playersDamge: {fileID: 0}
   spotlight: {fileID: 6565476794227051594}
+  jumpForce: 0
   viewMask:
     serializedVersion: 2
     m_Bits: 64
   hitbox: {fileID: 0}
   player: {fileID: 0}
   animator: {fileID: 6565476794570056970}
+  jumpControllerTransform: {fileID: 0}
   pointA: {fileID: 0}
   pointB: {fileID: 0}
   rb: {fileID: 0}
   stopMovingWhenTakingHit: 0
   isFacingRight: 1
+  hpBar: {fileID: 0}
+  Player: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &6565476794570056972
 Rigidbody2D:
   serializedVersion: 4
@@ -543,3 +552,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8256014236724711882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2927594637119254684}
+  m_Layer: 7
+  m_Name: jumpControllerRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2927594637119254684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256014236724711882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.116, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6565476794570056971}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

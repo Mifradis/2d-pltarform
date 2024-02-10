@@ -8,6 +8,7 @@ TagManager:
   - Sword
   - EnemySword
   - Enemy
+  - EnemyJumpController
   layers:
   - Default
   - TransparentFX

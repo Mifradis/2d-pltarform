@@ -19,7 +19,7 @@ MonoBehaviour:
   damage: 10
   fireRate: 3
   viewDistance: 10
-  speed: 5
+  speed: 150
   velocity: {x: -5, y: -0.000009655952}
   timeToSpotPlayer: 0.5
   viewAngle: 29.3
