@@ -18,7 +18,6 @@ public class Npc : MonoBehaviour
     float nextAttackTime;
     public Transform player;
     public Animator animator;
-    [SerializeField] Transform jumpControllerTransform;
     public GameObject pointA;
     public GameObject pointB;
     [SerializeField]Rigidbody2D rb;
@@ -39,7 +38,6 @@ public class Npc : MonoBehaviour
     {
         isPlayerSpotted = false;
         currentPoint = pointB.transform;
-        jumpControllerTransform = GameObject.FindGameObjectWithTag("EnemyJumpController").transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<GameObject>();
@@ -99,12 +97,12 @@ public class Npc : MonoBehaviour
             {         
                 if (currentPoint == pointB.transform)
                 {
-                    rb.velocity = new Vector2(enemyData.speed * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(Vector2.right.x * enemyData.speed, rb.velocity.y);
                     enemyData.velocity = rb.velocity;
                 }
                 else
                 {
-                    rb.velocity = new Vector2(-enemyData.speed * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(Vector2.left.x * enemyData.speed, rb.velocity.y);
                     enemyData.velocity = rb.velocity;
                 }
                 if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
@@ -118,13 +116,13 @@ public class Npc : MonoBehaviour
             }
             else if(player.transform.position.x > transform.position.x)
             {
-                rb.velocity = new Vector2(enemyData.speed * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(Vector2.right.x * enemyData.speed, rb.velocity.y);
                 enemyData.velocity = rb.velocity;
             }
             else if(player.transform.position.x < transform.position.x)
             {
                 print(-enemyData.speed);
-                rb.velocity = new Vector2(-enemyData.speed * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(Vector2.left.x * enemyData.speed, rb.velocity.y);
                 enemyData.velocity = rb.velocity;
             }
         }
@@ -212,13 +210,13 @@ public class Npc : MonoBehaviour
         RaycastHit2D jumpController;
         if (isFacingRight)
         {
-            jumpController = Physics2D.Raycast(jumpControllerTransform.position, jumpControllerTransform.right*0.2f, 5f);
-            Debug.DrawRay(jumpControllerTransform.position, jumpControllerTransform.right * 0.2f, Color.green);
+            jumpController = Physics2D.Raycast(transform.position + Vector3.right, transform.right*0.2f, 5f);
+            Debug.DrawRay(transform.position + Vector3.right, transform.right * 0.2f, Color.green);
         }
         else
         {
-            jumpController = Physics2D.Raycast(jumpControllerTransform.position, -jumpControllerTransform.right*0.2f, 0.2f);
-            Debug.DrawRay(jumpControllerTransform.position, -jumpControllerTransform.right * 0.2f, Color.green);
+            jumpController = Physics2D.Raycast(transform.position + Vector3.left, -transform.right*0.2f, 0.2f);
+            Debug.DrawRay(transform.position + Vector3.left, -transform.right * 0.2f, Color.green);
         }
 
         if (rb.velocity.y == 0)
