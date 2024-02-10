@@ -538,6 +538,7 @@ MonoBehaviour:
   enemyData: {fileID: 0}
   playersDamge: {fileID: 0}
   spotlight: {fileID: 2107888935}
+  jumpForce: 0
   viewMask:
     serializedVersion: 2
     m_Bits: 64
@@ -551,6 +552,9 @@ MonoBehaviour:
   isFacingRight: 1
   hpBar: {fileID: 0}
   Player: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &373720056
 GameObject:
   m_ObjectHideFlags: 0
@@ -14587,9 +14591,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 513268083}
     - target: {fileID: 6711046288970341818, guid: 5e472498cef68af499420e6c708b071e, type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711046288970341818, guid: 5e472498cef68af499420e6c708b071e, type: 3}
       propertyPath: playersDamge
       value: 
       objectReference: {fileID: 1284513648}
+    - target: {fileID: 6711046288970341818, guid: 5e472498cef68af499420e6c708b071e, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6711046288970341822, guid: 5e472498cef68af499420e6c708b071e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.75

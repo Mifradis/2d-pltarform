@@ -61,9 +61,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Physics2D.IgnoreLayerCollision(6, 7);
         if (isDashing)
         {
+            Physics2D.IgnoreLayerCollision(6, 7);
             return;
         }
         setDashDirection();

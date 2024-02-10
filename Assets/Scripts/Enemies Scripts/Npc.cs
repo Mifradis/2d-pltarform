@@ -10,6 +10,7 @@ public class Npc : MonoBehaviour
     public static event System.Action OnGuardHasSpottedPlayer;
     public PlayerMovement playersDamge;
     public Light spotlight;
+    [SerializeField] float jumpForce;
     public LayerMask viewMask;
     public GameObject hitbox;
     float takingHitTime = 0;
@@ -30,6 +31,7 @@ public class Npc : MonoBehaviour
     Collider2D enemyCollider;
     float angleBetweenGuardAndPlayer;
     [SerializeField]GameObject Player;
+    [SerializeField] LayerMask groundMask;
     bool isPlayerSpotted;
     bool flip;
     void Start()
@@ -89,18 +91,18 @@ public class Npc : MonoBehaviour
                 localScale *= new Vector2(-1, 1);
                 transform.localScale = localScale;
             }
-            if (currentPoint == pointB.transform)
-            {
-                rb.velocity = new Vector2(enemyData.speed, rb.velocity.y);
-                enemyData.velocity = rb.velocity;
-            }
-            else
-            {
-                rb.velocity = new Vector2(-enemyData.speed, rb.velocity.y);
-                enemyData.velocity = rb.velocity;
-            }
-            
-       
+            if (!isPlayerSpotted)
+            {         
+                if (currentPoint == pointB.transform)
+                {
+                    rb.velocity = new Vector2(enemyData.speed, rb.velocity.y);
+                    enemyData.velocity = rb.velocity;
+                }
+                else
+                {
+                    rb.velocity = new Vector2(-enemyData.speed, rb.velocity.y);
+                    enemyData.velocity = rb.velocity;
+                }
                 if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
                 {
                     currentPoint = pointA.transform;
@@ -109,13 +111,23 @@ public class Npc : MonoBehaviour
                 {
                     currentPoint = pointB.transform;
                 }
-            
+            }
+            else if(player.transform.position.x > transform.position.x)
+            {
+                rb.velocity = new Vector2(enemyData.speed, rb.velocity.y);
+                enemyData.velocity = rb.velocity;
+            }
+            else if(player.transform.position.x < transform.position.x)
+            {
+                print(-enemyData.speed);
+                rb.velocity = new Vector2(-enemyData.speed, rb.velocity.y);
+                enemyData.velocity = rb.velocity;
+            }
         }
     }
     bool CanSeePlayer()
     {
-        
-        
+
             if(Vector2.Distance(transform.position, player.position) <= enemyData.viewDistance)
             {
                 
@@ -189,6 +201,13 @@ public class Npc : MonoBehaviour
             animator.SetTrigger("Death");
             rb.bodyType = RigidbodyType2D.Static;
             Destroy(enemyCollider);
+        }
+    }
+    void Jump()
+    {
+        if(Physics2D.Raycast(transform.position, new Vector2(2,0), groundMask)|| Physics2D.Raycast(transform.position, new Vector2(-2, 0), groundMask))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 }
