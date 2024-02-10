@@ -60,6 +60,7 @@ public class Npc : MonoBehaviour
             }
         }
         animator.SetInteger("Speed", (int) enemyData.speed);
+        animator.SetInteger("YAxis", (int)rb.velocity.y);
         if (CanSeePlayer())
         {
             spotlight.color = Color.red;
@@ -79,6 +80,7 @@ public class Npc : MonoBehaviour
     {
         Movement();
         Attack();
+        Jump();
     }
     void Movement()
     {
@@ -205,9 +207,12 @@ public class Npc : MonoBehaviour
     }
     void Jump()
     {
-        if(Physics2D.Raycast(transform.position, new Vector2(2,0), groundMask)|| Physics2D.Raycast(transform.position, new Vector2(-2, 0), groundMask))
+        if (rb.velocity.y == 0)
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if (Physics2D.Raycast(transform.position, transform.right, 2).collider.tag == "Ground" || Physics2D.Raycast(transform.position, -transform.right, 2).collider.tag == "Ground")
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
         }
     }
 }
