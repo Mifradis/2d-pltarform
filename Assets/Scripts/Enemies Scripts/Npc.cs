@@ -34,8 +34,10 @@ public class Npc : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     bool isPlayerSpotted;
     bool flip;
+    bool isDead;
     void Start()
     {
+        isDead = false;
         isPlayerSpotted = false;
         currentPoint = pointB.transform;
         animator = GetComponent<Animator>();
@@ -169,13 +171,14 @@ public class Npc : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!animator.GetBool("TakingHit"))
+        if (!animator.GetBool("TakingHit")&&!isDead)
         {
             if (collision.tag == "Sword")
             {
                 animator.SetBool("TakingHit", true);
                 takingHitTime = Time.time;
                 takingDamage();
+                
             }
         }
     }
@@ -198,7 +201,8 @@ public class Npc : MonoBehaviour
         float positionX = ((staticScaleX * (playersDamge.damage / enemyData.maxHp))) / 2;
         hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
         if (enemyData.hp <= 0)
-        {   
+        {
+            isDead = true;
             destroyingTime = Time.time;
             animator.SetTrigger("Death");
             rb.bodyType = RigidbodyType2D.Static;
