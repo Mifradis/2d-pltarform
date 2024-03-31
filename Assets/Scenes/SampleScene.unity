@@ -568,7 +568,7 @@ PrefabInstance:
     - target: {fileID: 576374451151058606, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
       propertyPath: enemyData
       value: 
-      objectReference: {fileID: 11400000, guid: 672c2a19610535c41b035434a19205a3, type: 2}
+      objectReference: {fileID: 11400000, guid: 23113afb10bf71f4b9297d4885afcbe5, type: 2}
     - target: {fileID: 576374451151058606, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
       propertyPath: jumpForce
       value: 15
@@ -641,6 +641,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6711046289744016296, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
+      propertyPath: m_Name
+      value: Point B - 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6711046289744016297, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.54
@@ -648,6 +652,10 @@ PrefabInstance:
     - target: {fileID: 6711046289744016297, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711046290802742355, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
+      propertyPath: m_Name
+      value: 'Point A - 1 '
       objectReference: {fileID: 0}
     - target: {fileID: 6711046290802742356, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -657,7 +665,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.75
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 576374451151058607, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
 --- !u!1 &356060604
 GameObject:
@@ -5693,27 +5702,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &695019447 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 576374451151058604, guid: eeb8c3d64fe7d344dbe90d960045c95b, type: 3}
-  m_PrefabInstance: {fileID: 330977374}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &695019449
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695019447}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0014549255, y: 0.007274914}
-  m_Size: {x: 0.12360306, y: 0.4204161}
-  m_Direction: 0
 --- !u!1 &699613105
 GameObject:
   m_ObjectHideFlags: 0
