@@ -80,6 +80,7 @@ public class Npc : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        
         Movement();
         Attack();
         Jump();
