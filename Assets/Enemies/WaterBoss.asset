@@ -15,11 +15,11 @@ MonoBehaviour:
   enemyName: 
   enemyTier: 0
   maxHp: 250
-  hp: 250
+  hp: 0
   damage: 25
-  fireRate: 3
+  fireRate: 1
   viewDistance: 10
   speed: 3
-  velocity: {x: 1, y: -0.0000005364418}
+  velocity: {x: 0, y: 0}
   timeToSpotPlayer: 0.5
   viewAngle: 30

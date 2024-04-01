@@ -35,6 +35,7 @@ public class Npc : MonoBehaviour
     bool isPlayerSpotted;
     bool flip;
     bool isDead;
+    float firstAttackTime;
     void Start()
     {
         isDead = false;
@@ -80,8 +81,12 @@ public class Npc : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
-        Movement();
+        if (!(firstAttackTime == 0) && (Time.time - firstAttackTime >= 1.5))
+        {
+            firstAttackTime = 0;
+            animator.SetInteger("AttackTurn", 0);
+        }
+            Movement();
         Attack();
         Jump();
     }
@@ -161,15 +166,16 @@ public class Npc : MonoBehaviour
         {
             if (Mathf.Abs(player.position.x - transform.position.x) <= 1 && Time.time > nextAttackTime)
             {
-                nextAttackTime = Time.time + enemyData.fireRate;
                 animator.SetBool("isAttacking", true);
+                nextAttackTime = Time.time + enemyData.fireRate;
+                firstAttackTime = Time.time;
                 if (animator.GetInteger("AttackTurn") >= 3)
                 {
                     animator.SetInteger("AttackTurn", 0);
                 }
                 else
                 {
-                    animator.SetInteger("AttackTurn", +1);
+                    animator.SetInteger("AttackTurn", animator.GetInteger("AttackTurn") + 1);
                 }
             }
             else
