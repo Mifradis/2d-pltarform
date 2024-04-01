@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: 
   enemyTier: 0
-  maxHp: 0
-  hp: 0
-  damage: 0
-  fireRate: 0
-  viewDistance: 0
-  speed: 0
-  velocity: {x: 0, y: 0}
-  timeToSpotPlayer: 0
-  viewAngle: 0
+  maxHp: 250
+  hp: 250
+  damage: 25
+  fireRate: 3
+  viewDistance: 10
+  speed: 3
+  velocity: {x: 1, y: -0.0000005364418}
+  timeToSpotPlayer: 0.5
+  viewAngle: 30

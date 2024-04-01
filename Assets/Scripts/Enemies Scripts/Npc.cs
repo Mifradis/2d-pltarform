@@ -163,6 +163,14 @@ public class Npc : MonoBehaviour
             {
                 nextAttackTime = Time.time + enemyData.fireRate;
                 animator.SetBool("isAttacking", true);
+                if (animator.GetInteger("AttackTurn") >= 3)
+                {
+                    animator.SetInteger("AttackTurn", 0);
+                }
+                else
+                {
+                    animator.SetInteger("AttackTurn", +1);
+                }
             }
             else
             {
