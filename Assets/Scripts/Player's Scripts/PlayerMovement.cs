@@ -38,24 +38,31 @@ public class PlayerMovement : MonoBehaviour
     PlayerInput playerInput;
     Rigidbody2D rb;
     public float damage;
-    [SerializeField] float healthPoint;
+    [SerializeField] public float healthPoint;
+    [SerializeField] public float maxHp;
     float takingHitTime = 0;
     public Animator animations;
-   
+
+    [SerializeField] float enemyDamage;
+    [SerializeField] public GameObject hpBar;
+    public float staticScaleX;
+
+
     public bool isFacingRight = true;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-  
+
     }
     void Start()
-    {    
+    {
+        healthPoint = maxHp;
         rb = GetComponent<Rigidbody2D>();
         animations = GetComponent<Animator>();
         playerInput.onJump += Jump;
         playerInput.onDash += Dash;
         playerInput.onJumpRelease += CutJump;
-        
+        staticScaleX = hpBar.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -80,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        
+
         Move();
         CheckGrounded();
         IncreaseGravity();
@@ -102,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void CutJump()
     {
-        if(rb.velocity.y != 0 && !jumpCancelled)
+        if (rb.velocity.y != 0 && !jumpCancelled)
         {
             jumpCancelled = true;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.3f);
@@ -127,9 +134,9 @@ public class PlayerMovement : MonoBehaviour
             if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0f)
             {
                 isFacingRight = !isFacingRight;
-                localScale *= new Vector2(-1,1);
+                localScale *= new Vector2(-1, 1);
                 transform.localScale = localScale;
-            }   
+            }
         }
     }
     private IEnumerator DashEnum()
@@ -149,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         animations.SetBool("isDashing", false);
         rb.velocity = realVelocity;
         yield return new WaitForSeconds(dashCooldown);
-        canDash = true;   
+        canDash = true;
     }
     void Dash()
     {
@@ -168,6 +175,8 @@ public class PlayerMovement : MonoBehaviour
         {
             animations.SetBool("TakingHit", true);
             takingHitTime = Time.time;
+            enemyDamage = collision.GetComponentInParent<Npc>().enemyData.damage;
+            takingDamage();
         }
     }
     bool CanMove()
@@ -181,4 +190,21 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
     }
+    void takingDamage()
+    {
+        healthPoint -= enemyDamage;
+        float scaleX = hpBar.transform.localScale.x;
+        hpBar.gameObject.transform.localScale = new Vector2((scaleX - (staticScaleX * (enemyDamage / maxHp))), hpBar.transform.localScale.y);
+        float positionX = ((staticScaleX * (enemyDamage / maxHp))) / 2;
+        hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
+        if (healthPoint <= 0)
+        {
+            //isDead = true;
+            //destroyingTime = Time.time;
+            animations.SetTrigger("Death");
+            //rb.bodyType = RigidbodyType2D.Static;
+            //Destroy(enemyCollider);
+        }
+    }
 }
+

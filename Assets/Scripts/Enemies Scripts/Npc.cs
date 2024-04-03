@@ -5,7 +5,7 @@ using UnityEngine;
 public class Npc : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Enemy enemyData;
+    public  Enemy enemyData;
 
     public static event System.Action OnGuardHasSpottedPlayer;
     public PlayerMovement playersDamge;

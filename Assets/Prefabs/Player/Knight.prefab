@@ -222,6 +222,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   feet: {fileID: 0}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   damage: 0
   healthPoint: 0
   animations: {fileID: 3421948328992247217}
