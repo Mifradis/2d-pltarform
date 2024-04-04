@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public GameObject hpBar;
     public float staticScaleX;
     public bool isDead;
+    string CurrentAnimationName;
 
 
     public bool isFacingRight = true;
@@ -65,11 +66,13 @@ public class PlayerMovement : MonoBehaviour
         playerInput.onDash += Dash;
         playerInput.onJumpRelease += CutJump;
         staticScaleX = hpBar.transform.localScale.x;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        CurrentAnimationName = animations.GetCurrentAnimatorClipInfo(0)[0].clip.ToString();
         if (isDashing)
         {
             Physics2D.IgnoreLayerCollision(6, 7);
@@ -183,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
     }
     bool CanMove()
     {
-        if (animations.GetBool("TakingHit") || animations.GetBool("Attacking") || isDashing)
+        if (animations.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || isDashing)
         {
             return false;
         }

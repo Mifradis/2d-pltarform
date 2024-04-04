@@ -52140,6 +52140,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.1387558
       objectReference: {fileID: 0}
+    - target: {fileID: 5661720103423089349, guid: 0461e8df5186b6942883dfce24e48708, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8180684774199264537, guid: 0461e8df5186b6942883dfce24e48708, type: 3}
       propertyPath: m_Name
       value: HP
@@ -52147,6 +52151,10 @@ PrefabInstance:
     - target: {fileID: 8180684774199264537, guid: 0461e8df5186b6942883dfce24e48708, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 9067636564895331103, guid: 0461e8df5186b6942883dfce24e48708, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0461e8df5186b6942883dfce24e48708, type: 3}

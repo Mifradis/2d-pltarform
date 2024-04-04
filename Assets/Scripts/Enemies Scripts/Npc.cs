@@ -36,6 +36,7 @@ public class Npc : MonoBehaviour
     bool flip;
     bool isDead;
     float firstAttackTime;
+    string CurrentAnimationName;
     void Start()
     {
         isDead = false;
@@ -55,7 +56,8 @@ public class Npc : MonoBehaviour
 
     void Update()
     {
-        if(destroyingTime != 0)
+        CurrentAnimationName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.ToString();
+        if (destroyingTime != 0)
         {
             if(Time.time >= destroyingTime + 3)
             {       
@@ -170,7 +172,7 @@ public class Npc : MonoBehaviour
         {
             if (Mathf.Abs(player.position.x - transform.position.x) <= 1 && Time.time > nextAttackTime)
             {
-                animator.SetBool("isAttacking", true);
+                animator.SetBool("isAttacking", true);    
                 nextAttackTime = Time.time + enemyData.fireRate;
                 firstAttackTime = Time.time;
                 if (animator.GetInteger("AttackTurn") >= 3)
@@ -203,7 +205,7 @@ public class Npc : MonoBehaviour
     }
     bool CanMove()
     {
-        if (animator.GetBool("TakingHit") || animator.GetBool("isAttacking") || Mathf.Abs(player.position.x - transform.position.x) <= 1)
+        if (animator.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || Mathf.Abs(player.position.x - transform.position.x) <= 1)
         {
             return false;
         }
