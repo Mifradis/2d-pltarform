@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        if (rb.velocity.y == 0)
+        if (rb.velocity.y == 0&&!isDead)
         {
             jumpCancelled = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void CutJump()
     {
-        if (rb.velocity.y != 0 && !jumpCancelled)
+        if (rb.velocity.y != 0 && !jumpCancelled || isDead)
         {
             jumpCancelled = true;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.3f);
@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
     }
     bool CanMove()
     {
-        if (animations.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || isDashing)
+        if (animations.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || isDashing ||isDead)
         {
             return false;
         }
@@ -197,21 +197,29 @@ public class PlayerMovement : MonoBehaviour
     }
     void takingDamage()
     {
-        healthPoint -= enemyDamage;
-        float scaleX = hpBar.transform.localScale.x;
-        hpBar.gameObject.transform.localScale = new Vector2((scaleX - (staticScaleX * (enemyDamage / maxHp))), hpBar.transform.localScale.y);
-        float positionX = ((staticScaleX * (enemyDamage / maxHp))) / 2;
-        hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
         if (healthPoint <= 0)
         {
             healthPoint = 0;
-            rb.bodyType = RigidbodyType2D.Static;
             //isDead = true;
             //destroyingTime = Time.time;
             isDead = true;
             animations.SetTrigger("Death");
             //Destroy(enemyCollider);
         }
+        if (healthPoint - enemyDamage <= 0)
+        {
+            healthPoint = 0;
+            hpBar.SetActive(false);
+        }
+        else
+        {
+            healthPoint -= enemyDamage;
+        }
+        float scaleX = hpBar.transform.localScale.x;
+        hpBar.gameObject.transform.localScale = new Vector2((scaleX - (staticScaleX * (enemyDamage / maxHp))), hpBar.transform.localScale.y);
+        float positionX = ((staticScaleX * (enemyDamage / maxHp))) / 2;
+        hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
+        
     }
 }
 

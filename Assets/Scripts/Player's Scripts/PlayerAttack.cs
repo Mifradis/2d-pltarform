@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     float firstAttackTime = 0;
     float secondAttackTime = 0;
     int attackTurn = 0;
+    string CurrentClipName = " ";
     void Start()
     {
         attackInp = GetComponent<PlayerInput>();
@@ -22,13 +23,12 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
-        if (Time.time > nextAttackTime)
+        CurrentClipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.ToString();
+
+        if(Time.time > nextAttackTime)
         {
-            isHitting = false;
+            animator.SetBool("Attacking", false);
         }
-        animator.SetBool("Attacking", isHitting);
         animator.SetInteger("attackTurn", attackTurn);
         if(attackTurn > 4)
         {
@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
         }
         
         
-        if(!(firstAttackTime == 0)&&(Time.time - firstAttackTime >= 0.8))
+        if(!(firstAttackTime == 0)&&(Time.time - firstAttackTime >= 1.5))
         {
             firstAttackTime = 0;
             attackTurn = 0;
@@ -48,9 +48,10 @@ public class PlayerAttack : MonoBehaviour
         
         if (CanAttack())
         {
-            isHitting = true;
+            animator.SetBool("Attacking", true);
             firstAttackTime = Time.time;
-            if(attackTurn >= 4)
+            nextAttackTime = Time.time + animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            if (attackTurn >= 4)
             {
                 attackTurn = 0;
             }
@@ -63,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
     bool CanAttack() {
         if(Time.time > nextAttackTime)
         {
-            isHitting = false;
+            animator.SetBool("Attacking", false);
             nextAttackTime = Time.time + attackTime;
             return true;
         }

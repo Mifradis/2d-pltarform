@@ -206,7 +206,7 @@ public class Npc : MonoBehaviour
     }
     bool CanMove()
     {
-        if (animator.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || Mathf.Abs(player.position.x - transform.position.x) <= 1)
+        if (isDead||animator.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || Mathf.Abs(player.position.x - transform.position.x) <= 1)
         {
             return false;
         }
@@ -227,7 +227,6 @@ public class Npc : MonoBehaviour
             isDead = true;
             destroyingTime = Time.time;
             animator.SetTrigger("Death");
-            rb.bodyType = RigidbodyType2D.Static;
             Destroy(enemyCollider);
         }
     }
@@ -245,7 +244,7 @@ public class Npc : MonoBehaviour
             Debug.DrawRay(transform.position + Vector3.left, -transform.right * 0.2f, Color.green);
         }
 
-        if (rb.velocity.y == 0)
+        if (rb.velocity.y == 0&&!isDead)
         {
             if (jumpController.collider != null)
             {
