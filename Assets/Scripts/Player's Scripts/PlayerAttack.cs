@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     bool isHitting = false;
-    float attackTime = 0.4f;
+    float attackTime = 0.6f;
     float nextAttackTime;
     public PlayerInput attackInp;
     public Animator animator;
@@ -27,10 +27,11 @@ public class PlayerAttack : MonoBehaviour
 
         if(Time.time > nextAttackTime)
         {
-            animator.SetBool("Attacking", false);
+            isHitting = false;
         }
+        animator.SetBool("Attacking", isHitting);
         animator.SetInteger("attackTurn", attackTurn);
-        if(attackTurn > 4)
+        if(attackTurn > 3)
         {
             attackTurn = 0;
         }
@@ -48,12 +49,12 @@ public class PlayerAttack : MonoBehaviour
         
         if (CanAttack())
         {
-            animator.SetBool("Attacking", true);
+            isHitting = true;
             firstAttackTime = Time.time;
-            nextAttackTime = Time.time + animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-            if (attackTurn >= 4)
+            nextAttackTime = Time.time + attackTime;
+            if (attackTurn >= 3)
             {
-                attackTurn = 0;
+                attackTurn = 1;
             }
             else
             {
@@ -64,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
     bool CanAttack() {
         if(Time.time > nextAttackTime)
         {
-            animator.SetBool("Attacking", false);
+            isHitting = true;
             nextAttackTime = Time.time + attackTime;
             return true;
         }

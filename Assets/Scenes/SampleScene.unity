@@ -52769,22 +52769,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3421948328992247215, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
   m_PrefabInstance: {fileID: 3421948328563496131}
   m_PrefabAsset: {fileID: 0}
---- !u!70 &2091099856
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091099847}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.032732725, y: -0.25233817}
-  m_Size: {x: 0.5421958, y: 1.3666339}
-  m_Direction: 0
 --- !u!108 &2107888935 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 6711046289029969151, guid: 5e472498cef68af499420e6c708b071e, type: 3}

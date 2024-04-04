@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 3421948328992247213}
   - component: {fileID: 3421948328992247214}
   - component: {fileID: 3421948328992247222}
+  - component: {fileID: 3624346134123441447}
   m_Layer: 6
   m_Name: Knight
   m_TagString: Player
@@ -230,7 +231,12 @@ MonoBehaviour:
     m_Bits: 0
   damage: 0
   healthPoint: 0
+  maxHp: 0
   animations: {fileID: 3421948328992247217}
+  enemyDamage: 0
+  hpBar: {fileID: 0}
+  staticScaleX: 0
+  isDead: 0
   isFacingRight: 1
 --- !u!114 &3421948328992247222
 MonoBehaviour:
@@ -246,3 +252,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackInp: {fileID: 3421948328992247213}
   animator: {fileID: 3421948328992247217}
+--- !u!70 &3624346134123441447
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421948328992247215}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.032732725, y: -0.25233817}
+  m_Size: {x: 0.5421958, y: 1.3666339}
+  m_Direction: 0

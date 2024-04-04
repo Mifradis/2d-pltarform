@@ -80,6 +80,7 @@ public class Npc : MonoBehaviour
             animator.SetBool("TakingHit", false);
         }
         animator.SetBool("CanMove", CanMove());
+        CanSeePlayer();
     }
     private void FixedUpdate()
     {
@@ -91,7 +92,7 @@ public class Npc : MonoBehaviour
         Movement();
         Attack();
         Jump();
-        print(CanSeePlayer());
+        //print(CanSeePlayer());
     }
     void Movement()
     {
@@ -171,7 +172,7 @@ public class Npc : MonoBehaviour
     {
         if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&isPlayerSpotted)
         {
-            if (Mathf.Abs(player.position.x - transform.position.x) <= 1 && Time.time > nextAttackTime)
+            if (Mathf.Abs(player.position.x - transform.position.x) <= 1.2 && Time.time > nextAttackTime)
             {
                 animator.SetBool("isAttacking", true);    
                 nextAttackTime = Time.time + enemyData.fireRate;
