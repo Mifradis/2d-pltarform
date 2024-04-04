@@ -36,7 +36,7 @@ public class Npc : MonoBehaviour
     bool flip;
     bool isDead;
     float firstAttackTime;
-    string CurrentAnimationName;
+    string CurrentAnimationName = " ";
     void Start()
     {
         isDead = false;
@@ -66,7 +66,7 @@ public class Npc : MonoBehaviour
         }
         animator.SetInteger("Speed", (int) enemyData.speed);
         animator.SetInteger("Y-axis", (int) rb.velocity.y);
-        if (CanSeePlayer())
+        if (isPlayerSpotted)
         {
             spotlight.color = Color.red;
         }
@@ -75,7 +75,7 @@ public class Npc : MonoBehaviour
             spotlight.color = originalSpotlightColor;
         }
         
-        if(Time.time - takingHitTime >= 0.4f)
+        if(Time.time - takingHitTime >= enemyData.takingHitTime)
         {
             animator.SetBool("TakingHit", false);
         }
@@ -88,9 +88,10 @@ public class Npc : MonoBehaviour
             firstAttackTime = 0;
             animator.SetInteger("AttackTurn", 0);
         }
-            Movement();
+        Movement();
         Attack();
         Jump();
+        print(CanSeePlayer());
     }
     void Movement()
     {
@@ -168,7 +169,7 @@ public class Npc : MonoBehaviour
     }
     void Attack()
     {
-        if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&CanSeePlayer())
+        if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&isPlayerSpotted)
         {
             if (Mathf.Abs(player.position.x - transform.position.x) <= 1 && Time.time > nextAttackTime)
             {

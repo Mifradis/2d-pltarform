@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Boss
   enemyTier: 2
   maxHp: 250
+  takingHitTime: 0.4
   hp: 250
   damage: 25
   fireRate: 3

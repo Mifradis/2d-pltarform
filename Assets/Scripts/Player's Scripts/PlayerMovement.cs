@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public GameObject hpBar;
     public float staticScaleX;
     public bool isDead;
-    string CurrentAnimationName;
+    string CurrentAnimationName = " ";
 
 
     public bool isFacingRight = true;

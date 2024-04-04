@@ -10,6 +10,7 @@ public class Enemy : ScriptableObject
 
     [Header("Features")]
     public float maxHp;
+    public float takingHitTime;
     public float hp;
     public float damage;
     public float fireRate;

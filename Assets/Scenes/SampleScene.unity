@@ -6532,7 +6532,7 @@ SpriteRenderer:
   m_Size: {x: 0.33, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1347853813
@@ -53438,6 +53438,18 @@ PrefabInstance:
     - target: {fileID: 9116307382463965435, guid: ba8e1b728656f90489c8933e1660418b, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116307382540725352, guid: ba8e1b728656f90489c8933e1660418b, type: 3}
+      propertyPath: m_SpotAngle
+      value: 29.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116307382540725352, guid: ba8e1b728656f90489c8933e1660418b, type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116307382540725352, guid: ba8e1b728656f90489c8933e1660418b, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9116307383933697092, guid: ba8e1b728656f90489c8933e1660418b, type: 3}
       propertyPath: Player
