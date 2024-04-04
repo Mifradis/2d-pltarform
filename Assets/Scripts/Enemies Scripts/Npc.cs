@@ -72,7 +72,7 @@ public class Npc : MonoBehaviour
         {
             spotlight.color = originalSpotlightColor;
         }
-        print(isPlayerSpotted);
+        
         if(Time.time - takingHitTime >= 0.4f)
         {
             animator.SetBool("TakingHit", false);
@@ -137,32 +137,36 @@ public class Npc : MonoBehaviour
     }
     bool CanSeePlayer()
     {
-
-            if(Vector2.Distance(transform.position, player.position) <= enemyData.viewDistance)
+        if (enemyData.hp < enemyData.maxHp)
+        {
+            isPlayerSpotted = true;
+            return true;
+        }
+        if (Vector2.Distance(transform.position, player.position) <= enemyData.viewDistance)
+        {
+            
+        Vector2 dirToPlayer = (player.position - transform.position);
+        if (isFacingRight)
+        {
+            angleBetweenGuardAndPlayer = Vector2.Angle(transform.right, dirToPlayer);
+        }if(!isFacingRight)
+        {
+            angleBetweenGuardAndPlayer = Vector2.Angle(-transform.right, dirToPlayer);
+        }
+            if(angleBetweenGuardAndPlayer < enemyData.viewAngle)
             {
-                
-            Vector2 dirToPlayer = (player.position - transform.position);
-            if (isFacingRight)
-            {
-                angleBetweenGuardAndPlayer = Vector2.Angle(transform.right, dirToPlayer);
-            }if(!isFacingRight)
-            {
-                angleBetweenGuardAndPlayer = Vector2.Angle(-transform.right, dirToPlayer);
-            }
-                if(angleBetweenGuardAndPlayer < enemyData.viewAngle)
+                if(Physics2D.Raycast(transform.position, player.transform.position, viewMask))
                 {
-                    if(Physics2D.Raycast(transform.position, player.transform.position, viewMask))
-                    {
-                        isPlayerSpotted = true;
-                        return true;
-                    }
+                    isPlayerSpotted = true;
+                    return true;
                 }
             }
+        }
         return false;
     }
     void Attack()
     {
-        if (!animator.GetBool("TakingHit"))
+        if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&CanSeePlayer())
         {
             if (Mathf.Abs(player.position.x - transform.position.x) <= 1 && Time.time > nextAttackTime)
             {

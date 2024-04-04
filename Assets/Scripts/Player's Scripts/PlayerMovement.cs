@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float enemyDamage;
     [SerializeField] public GameObject hpBar;
     public float staticScaleX;
+    public bool isDead;
 
 
     public bool isFacingRight = true;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
+        isDead = false;
         healthPoint = maxHp;
         rb = GetComponent<Rigidbody2D>();
         animations = GetComponent<Animator>();
@@ -199,10 +201,12 @@ public class PlayerMovement : MonoBehaviour
         hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
         if (healthPoint <= 0)
         {
+            healthPoint = 0;
+            rb.bodyType = RigidbodyType2D.Static;
             //isDead = true;
             //destroyingTime = Time.time;
+            isDead = true;
             animations.SetTrigger("Death");
-            //rb.bodyType = RigidbodyType2D.Static;
             //Destroy(enemyCollider);
         }
     }
