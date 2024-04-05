@@ -172,7 +172,7 @@ public class Npc : MonoBehaviour
     {
         if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&isPlayerSpotted)
         {
-            if (Mathf.Abs(player.position.x - transform.position.x) <= 1.2 && Time.time > nextAttackTime)
+            if (Mathf.Abs(player.position.x - transform.position.x) <= 1.5f && Time.time > nextAttackTime)
             {
                 animator.SetBool("isAttacking", true);    
                 nextAttackTime = Time.time + enemyData.fireRate;

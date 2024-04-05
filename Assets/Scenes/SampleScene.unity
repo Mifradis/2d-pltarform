@@ -53231,6 +53231,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1071760897403777665, guid: 5e472498cef68af499420e6c708b071e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1071760897403777665, guid: 5e472498cef68af499420e6c708b071e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.489998
       objectReference: {fileID: 0}
@@ -53479,6 +53483,10 @@ PrefabInstance:
       propertyPath: playersDamge
       value: 
       objectReference: {fileID: 1284513648}
+    - target: {fileID: 9116307383933697095, guid: ba8e1b728656f90489c8933e1660418b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9116307383933697096, guid: ba8e1b728656f90489c8933e1660418b, type: 3}
       propertyPath: m_SortingOrder
       value: 1
