@@ -5939,7 +5939,7 @@ GameObject:
   - component: {fileID: 729301130}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5965,10 +5965,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 35967e8a4dfb1664e9b066939272c0a4, type: 3}
   hit: {fileID: 8300000, guid: 80151380c0f818243b66a78ef69c9fcd, type: 3}
   death: {fileID: 0}
-  jump: {fileID: 0}
-  run: {fileID: 0}
-  takeHit: {fileID: 0}
+  jump: {fileID: 8300000, guid: 18524d7f295d11b40a2b7bd3d9ef3561, type: 3}
+  run: {fileID: 8300000, guid: 7dd1b75dd97f9af468c655f59ab900cc, type: 3}
+  takeHit: {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
   attack: {fileID: 8300000, guid: 80151380c0f818243b66a78ef69c9fcd, type: 3}
+  explosion: {fileID: 8300000, guid: 2dad387ce2d474e4bbd220a0db603ec8, type: 3}
 --- !u!4 &729301131
 Transform:
   m_ObjectHideFlags: 0
@@ -6261,7 +6262,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

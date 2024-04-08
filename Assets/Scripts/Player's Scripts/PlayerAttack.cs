@@ -13,6 +13,11 @@ public class PlayerAttack : MonoBehaviour
     float secondAttackTime = 0;
     int attackTurn = 0;
     string CurrentClipName = " ";
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Start()
     {
         attackInp = GetComponent<PlayerInput>();
@@ -50,6 +55,14 @@ public class PlayerAttack : MonoBehaviour
         if (CanAttack())
         {
             isHitting = true;
+            if(attackTurn == 2)
+            {
+                audioManager.PlaySFX(audioManager.explosion);
+            }
+            else
+            {
+                audioManager.PlaySFX(audioManager.hit);
+            }         
             firstAttackTime = Time.time;
             nextAttackTime = Time.time + attackTime;
             if (attackTurn >= 3)

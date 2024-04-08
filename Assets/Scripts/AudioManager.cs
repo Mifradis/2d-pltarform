@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip run;
     public AudioClip takeHit;
     public AudioClip attack;
+    public AudioClip explosion;
 
 
     private void Start()
@@ -24,5 +25,8 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = background[Random.Range(0,3)];
         musicSource.Play();
     }
-
+    public void PlaySFX(AudioClip clip)
+    {
+        sfxSource.PlayOneShot(clip);
+    }
 }

@@ -48,12 +48,14 @@ public class PlayerMovement : MonoBehaviour
     public float staticScaleX;
     public bool isDead;
     string CurrentAnimationName = " ";
+    AudioManager audioManager;
 
 
     public bool isFacingRight = true;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
     }
     void Start()
@@ -80,6 +82,10 @@ public class PlayerMovement : MonoBehaviour
         }
         setDashDirection();
         animations.SetInteger("Speed", (int)velocity.x);
+        if(animations.GetInteger("Speed") != 0)
+        {
+            //audioManager.PlaySFX(audioManager.run);
+        }
         animations.SetInteger("Y velocity", (int)rb.velocity.y);
         if (Time.time - takingHitTime >= 0.4)
         {
@@ -108,8 +114,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.velocity.y == 0&&!isDead)
         {
+            audioManager.PlaySFX(audioManager.jump);
             jumpCancelled = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            
         }
     }
     void CutJump()
@@ -136,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity = playerInput.horizontalInput * speed;
             transform.Translate(velocity * Time.deltaTime);
+            
             if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0f)
             {
                 isFacingRight = !isFacingRight;
@@ -219,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
         hpBar.gameObject.transform.localScale = new Vector2((scaleX - (staticScaleX * (enemyDamage / maxHp))), hpBar.transform.localScale.y);
         float positionX = ((staticScaleX * (enemyDamage / maxHp))) / 2;
         hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
-        
+        audioManager.PlaySFX(audioManager.takeHit);
     }
 }
 
