@@ -37,6 +37,7 @@ public class Npc : MonoBehaviour
     bool isDead;
     float firstAttackTime;
     string CurrentAnimationName = " ";
+    AudioManager audioManager;
     void Start()
     {
         isDead = false;
@@ -53,7 +54,10 @@ public class Npc : MonoBehaviour
         staticScaleX = hpBar.transform.localScale.x;
         enemyCollider = GetComponent<CapsuleCollider2D>();
     }
-
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Update()
     {
         CurrentAnimationName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.ToString();
@@ -174,7 +178,8 @@ public class Npc : MonoBehaviour
         {
             if (Mathf.Abs(player.position.x - transform.position.x) <= 1.5f && Time.time > nextAttackTime)
             {
-                animator.SetBool("isAttacking", true);    
+                animator.SetBool("isAttacking", true);
+                audioManager.PlaySFX(audioManager.hit);
                 nextAttackTime = Time.time + enemyData.fireRate;
                 firstAttackTime = Time.time;
                 if (animator.GetInteger("AttackTurn") >= 3)
@@ -223,6 +228,7 @@ public class Npc : MonoBehaviour
         hpBar.gameObject.transform.localScale = new Vector2((scaleX - (staticScaleX * (playersDamge.damage / enemyData.maxHp))), hpBar.transform.localScale.y);
         float positionX = ((staticScaleX * (playersDamge.damage / enemyData.maxHp))) / 2;
         hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
+        audioManager.PlaySFX(audioManager.takeHit);
         if (enemyData.hp <= 0)
         {
             isDead = true;
