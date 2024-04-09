@@ -174,12 +174,19 @@ public class Npc : MonoBehaviour
     }
     void Attack()
     {
-        if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&isPlayerSpotted)
+        if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&isPlayerSpotted&&!isDead)
         {
             if (Mathf.Abs(player.position.x - transform.position.x) <= 1.5f && Time.time > nextAttackTime)
             {
                 animator.SetBool("isAttacking", true);
+                if(animator.GetInteger("AttackTurn") == 2)
+                {
+                    audioManager.PlaySFX(audioManager.waterAttack);
+                }
+                else
+                {
                 audioManager.PlaySFX(audioManager.hit);
+                }
                 nextAttackTime = Time.time + enemyData.fireRate;
                 firstAttackTime = Time.time;
                 if (animator.GetInteger("AttackTurn") >= 3)

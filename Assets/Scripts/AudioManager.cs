@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip takeHit;
     public AudioClip attack;
     public AudioClip explosion;
+    public AudioClip waterAttack;
 
 
     private void Start()
