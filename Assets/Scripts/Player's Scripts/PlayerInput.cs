@@ -20,8 +20,10 @@ public class PlayerInput : MonoBehaviour
     KeyCode dashKey = KeyCode.LeftShift;
     KeyCode shootKey = KeyCode.J;
     KeyCode reloadKey = KeyCode.R;
+    KeyCode mainMenuKey = KeyCode.H;
 
     public event Action onJump = delegate { };
+    public event Action onMainMenu = delegate { };
     public event Action onShoot = delegate { };
     public event Action onJumpRelease = delegate { };
     public event Action onDash = delegate { };
@@ -40,6 +42,7 @@ public class PlayerInput : MonoBehaviour
         GetDashInput();
         GetShootInput();
         GetReloadInput();
+        GetMainMenuInput();
     }
     private void FixedUpdate()
     {
@@ -79,6 +82,13 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(reloadKey))
         {
             onReload();
+        }
+    }
+    void GetMainMenuInput()
+    {
+        if (Input.GetKeyDown(mainMenuKey))
+        {
+            onMainMenu();
         }
     }
 }

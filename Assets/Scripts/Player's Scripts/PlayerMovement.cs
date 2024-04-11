@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isDead;
     string CurrentAnimationName = " ";
     AudioManager audioManager;
+    [SerializeField] GameObject mainMenu;
 
 
     public bool isFacingRight = true;
@@ -67,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.onJump += Jump;
         playerInput.onDash += Dash;
         playerInput.onJumpRelease += CutJump;
+        playerInput.onMainMenu += MainMenu;
         staticScaleX = hpBar.transform.localScale.x;
         
     }
@@ -229,6 +231,23 @@ public class PlayerMovement : MonoBehaviour
         float positionX = ((staticScaleX * (enemyDamage / maxHp))) / 2;
         hpBar.transform.localPosition = new Vector2(hpBar.transform.localPosition.x - positionX, hpBar.transform.localPosition.y);
         audioManager.PlaySFX(audioManager.takeHit);
+    }
+    void MainMenu()
+    {
+        if (!mainMenu.activeInHierarchy)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+            mainMenu.SetActive(true);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+            Time.timeScale = 1;
+            mainMenu.SetActive(false);
+        }
     }
 }
 

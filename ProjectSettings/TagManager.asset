@@ -11,6 +11,8 @@ TagManager:
   - EnemyJumpController
   - PlayerHP
   - Audio
+  - Options
+  - MainMenu
   layers:
   - Default
   - TransparentFX
