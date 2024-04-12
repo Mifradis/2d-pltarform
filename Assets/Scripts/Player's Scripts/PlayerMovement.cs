@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashCooldown = 1f;
     Vector2 dashDirection;
-    bool isDashing;
-    bool canDash = true;
+    public bool isDashing;
+    public bool canDash = true;
     Vector2 realVelocity;
     float gravity = 0;
 
@@ -77,11 +77,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CurrentAnimationName = animations.GetCurrentAnimatorClipInfo(0)[0].clip.ToString();
-        if (isDashing)
-        {
-            Physics2D.IgnoreLayerCollision(6, 7);
-            return;
-        }
         setDashDirection();
         animations.SetInteger("Speed", (int)velocity.x);
         if(animations.GetInteger("Speed") != 0)
@@ -208,15 +203,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void takingDamage()
     {
-        if (healthPoint <= 0)
-        {
-            healthPoint = 0;
-            //isDead = true;
-            //destroyingTime = Time.time;
-            isDead = true;
-            animations.SetTrigger("Death");
-            //Destroy(enemyCollider);
-        }
         if (healthPoint - enemyDamage <= 0)
         {
             healthPoint = 0;
@@ -226,6 +212,16 @@ public class PlayerMovement : MonoBehaviour
         {
             healthPoint -= enemyDamage;
         }
+        if (healthPoint <= 0)
+        {
+            healthPoint = 0;
+            //isDead = true;
+            //destroyingTime = Time.time;
+            isDead = true;
+            animations.SetTrigger("Death");
+            //Destroy(enemyCollider);
+        }
+        
         float scaleX = hpBar.transform.localScale.x;
         hpBar.gameObject.transform.localScale = new Vector2((scaleX - (staticScaleX * (enemyDamage / maxHp))), hpBar.transform.localScale.y);
         float positionX = ((staticScaleX * (enemyDamage / maxHp))) / 2;

@@ -176,7 +176,7 @@ public class Npc : MonoBehaviour
     {
         if (!animator.GetBool("TakingHit")&&!playersDamge.isDead&&isPlayerSpotted&&!isDead)
         {
-            if (Mathf.Abs(player.position.x - transform.position.x) <= 1.5f && Time.time > nextAttackTime)
+            if (Mathf.Abs(player.position.y - transform.position.y) <= 2f&&Mathf.Abs(player.position.x - transform.position.x) <= 2f && Time.time > nextAttackTime)
             {
                 animator.SetBool("isAttacking", true);
                 if(animator.GetInteger("AttackTurn") == 2)
@@ -219,7 +219,7 @@ public class Npc : MonoBehaviour
     }
     bool CanMove()
     {
-        if (isDead||animator.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || Mathf.Abs(player.position.x - transform.position.x) <= 1)
+        if (isDead||animator.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || Mathf.Abs(player.position.x - transform.position.x) <= 2)
         {
             return false;
         }

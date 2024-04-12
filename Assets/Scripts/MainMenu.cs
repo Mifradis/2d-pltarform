@@ -7,9 +7,14 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     AudioManager audioManager;
+    [Header("Main Menu")]
     [SerializeField] GameObject options;
+    [SerializeField] GameObject mainMenu;
+    [Header("Options")]
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
+    [SerializeField] GameObject Back;
+    [Header("Audio")]
     [SerializeField] AudioSource music;
     [SerializeField] AudioSource sfx;
     
@@ -31,8 +36,9 @@ public class MainMenu : MonoBehaviour
     }
     public void OpenOptions()
     {
-        GameObject.FindGameObjectWithTag("MainMenu").SetActive(false);
+        mainMenu.SetActive(false);
         options.SetActive(true);
+        Back.SetActive(true);
     }
     public void ChangeMusicVolume()
     {
@@ -51,5 +57,11 @@ public class MainMenu : MonoBehaviour
             Time.timeScale = 1;
             gameObject.SetActive(false);
         }
+    }
+    public void BackToMenu()
+    {
+        mainMenu.SetActive(true);
+        options.SetActive(false);
+        Back.SetActive(false);
     }
 }

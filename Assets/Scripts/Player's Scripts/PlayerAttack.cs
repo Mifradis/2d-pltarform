@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     bool isHitting = false;
     float attackTime = 0.6f;
     float nextAttackTime;
+    PlayerMovement Movement;
     public PlayerInput attackInp;
     public Animator animator;
     float firstAttackTime = 0;
@@ -16,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     AudioManager audioManager;
     private void Awake()
     {
+        Movement = GetComponentInParent<PlayerMovement>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     void Start()
@@ -33,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
         if(Time.time > nextAttackTime)
         {
             isHitting = false;
+            Movement.canDash = true;
         }
         animator.SetBool("Attacking", isHitting);
         animator.SetInteger("attackTurn", attackTurn);
@@ -55,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
         if (CanAttack())
         {
             isHitting = true;
+            Movement.canDash = false;
             if(attackTurn == 2)
             {
                 audioManager.PlaySFX(audioManager.explosion);
@@ -76,7 +80,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
     bool CanAttack() {
-        if(Time.time > nextAttackTime)
+        if(Time.time > nextAttackTime&&!Movement.isDead&&!Movement.isDashing)
         {
             isHitting = true;
             nextAttackTime = Time.time + attackTime;
