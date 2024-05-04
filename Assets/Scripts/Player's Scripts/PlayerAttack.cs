@@ -60,7 +60,7 @@ public class PlayerAttack : MonoBehaviour
         {
             isHitting = true;
             Movement.canDash = false;
-            if(attackTurn == 2&& attackName.Equals("Auto Attack"))
+            if(attackTurn == 2 && attackName.Equals("Auto Attack"))
             {
                 audioManager.PlaySFX(audioManager.explosion);
             }
