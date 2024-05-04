@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [Header("Main Menu")]
     [SerializeField] GameObject options;
     [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject loadingScreen;
     [Header("Options")]
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
@@ -19,13 +20,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] AudioSource sfx;
     
     private void Awake()
-    {
+    { 
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         musicSlider.value = music.volume;
         sfxSlider.value = sfx.volume;
     }
     public void GoToScene(string sceneName)
     {
+        loadingScreen.SetActive(true);
         SceneManager.LoadScene(sceneName);
         Debug.Log("Starting");
     }
