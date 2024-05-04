@@ -13,6 +13,7 @@ TagManager:
   - Audio
   - Options
   - MainMenu
+  - Loading
   layers:
   - Default
   - TransparentFX

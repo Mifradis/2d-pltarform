@@ -192,6 +192,10 @@ public class PlayerMovement : MonoBehaviour
     }
     bool CanMove()
     {
+        if (CurrentAnimationName.Contains("Jumping"))
+        {
+            return true;
+        }
         if (animations.GetBool("TakingHit") || CurrentAnimationName.Contains("Attack") || isDashing ||isDead)
         {
             return false;

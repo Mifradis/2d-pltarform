@@ -6880,6 +6880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 1871745812}
   mainMenu: {fileID: 2001477034}
+  loadingScreen: {fileID: 0}
   musicSlider: {fileID: 2015978602}
   sfxSlider: {fileID: 2007603778}
   Back: {fileID: 643587113}
@@ -8254,6 +8255,7 @@ MonoBehaviour:
   dashingTime: 0.1
   dashCooldown: 1
   isDashing: 0
+  canDash: 1
   playerHeight: 1
   checkOffset: 0.5
   groundLayer:
@@ -56227,6 +56229,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 309878601971ace4389cc05171c6e1d5, type: 3}
+    - target: {fileID: 3421948328992247218, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5852863818032369108, guid: 369e59b2d8885734fae76e35394cb053, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
