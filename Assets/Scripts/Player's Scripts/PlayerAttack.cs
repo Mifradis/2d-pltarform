@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     float firstAttackTime = 0;
     float secondAttackTime = 0;
     int attackTurn = 0;
+    string attackName;
     string CurrentClipName = " ";
     AudioManager audioManager;
     private void Awake()
@@ -59,7 +60,7 @@ public class PlayerAttack : MonoBehaviour
         {
             isHitting = true;
             Movement.canDash = false;
-            if(attackTurn == 2)
+            if(attackTurn == 2&& attackName.Equals("Auto Attack"))
             {
                 audioManager.PlaySFX(audioManager.explosion);
             }
@@ -69,21 +70,39 @@ public class PlayerAttack : MonoBehaviour
             }         
             firstAttackTime = Time.time;
             nextAttackTime = Time.time + attackTime;
-            if (attackTurn >= 3)
+            if (attackName.Equals("Auto Attack"))
             {
-                attackTurn = 1;
-            }
-            else
-            {
-                attackTurn++;
+                if (attackTurn >= 3)
+                {
+                    attackTurn = 1;
+                }
+                else
+                {
+                    attackTurn++;
+                }
             }
         }
     }
     bool CanAttack() {
-        if(Time.time > nextAttackTime&&!Movement.isDead&&!Movement.isDashing)
+        if (Movement.rb.velocity.y > 0)
+        {
+            if (Time.time > nextAttackTime && !Movement.isDead && !Movement.isDashing)
+            {
+                isHitting = true;
+                nextAttackTime = Time.time + attackTime;
+                attackName = "Jumping Attack";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        if(Time.time > nextAttackTime&&!Movement.isDead&&!Movement.isDashing&&Movement.rb.velocity.y==0)
         {
             isHitting = true;
             nextAttackTime = Time.time + attackTime;
+            attackName = "Auto Attack";
             return true;
         }
         else

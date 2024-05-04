@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask enemyMask;
     [SerializeField] LayerMask playerMask;
     PlayerInput playerInput;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     public float damage;
     [SerializeField] public float healthPoint;
     [SerializeField] public float maxHp;
@@ -207,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void takingDamage()
     {
-        if (healthPoint - enemyDamage <= 0)
+        if (healthPoint - enemyDamage <= 0&&!isDashing)
         {
             healthPoint = 0;
             hpBar.SetActive(false);

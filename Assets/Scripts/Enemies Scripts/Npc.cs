@@ -241,7 +241,7 @@ public class Npc : MonoBehaviour
             isDead = true;
             destroyingTime = Time.time;
             animator.SetTrigger("Death");
-            Destroy(enemyCollider);
+            //Destroy(enemyCollider);
         }
     }
     void Jump()
